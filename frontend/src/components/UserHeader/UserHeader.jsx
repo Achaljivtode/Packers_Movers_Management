@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 
 function UserHeader() {
@@ -13,6 +14,17 @@ function UserHeader() {
         setIsSideBarVisible(!isSideBarVisible)
     }
 
+
+    // navigations
+    const navigate = useNavigate();
+
+    const goToUserLogin = () => {
+        navigate('/user-login');
+    }
+    const goToAdminLogin = () => {
+        navigate('/admin-login');
+    }
+
     return (
         <div>
             <header className="bg-slate-800 border">
@@ -20,7 +32,7 @@ function UserHeader() {
 
                     {/* logo */}
                     <div className="flex lg:flex-1">
-                        <a href="#" className="-m-1.5 p-1.5 text-white">
+                        <a href="/" className="-m-1.5 p-1.5 text-white">
                             <h1>LOGO</h1>
                         </a>
                     </div>
@@ -41,9 +53,9 @@ function UserHeader() {
                     {/* navigation links */}
                     <div className="hidden lg:flex lg:gap-x-12">
 
-                        <a href="#" className="text-sm/6 font-semibold text-white">Home</a>
-                        <a href="#" className="text-sm/6 font-semibold text-white">About</a>
-                        <a href="#" className="text-sm/6 font-semibold text-white">Search</a>
+                        <a href="/" className="text-sm/6 font-semibold text-white">Home</a>
+                        <a href="/about" className="text-sm/6 font-semibold text-white">About</a>
+                        <a href="/search" className="text-sm/6 font-semibold text-white">Search</a>
 
                         <div className="relative ">
                             <button type="button"
@@ -61,8 +73,8 @@ function UserHeader() {
                                 isDropDownVisible && (
                                     <div className="absolute top-full -left-8 z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white ring-1 shadow-lg ring-gray-900/5">
                                         <div className="p-4  ">
-                                            <h1>User</h1>
-                                            <h1>Admin</h1>
+                                            <h1 onClick={goToUserLogin}>User</h1>
+                                            <h1 onClick={goToAdminLogin}>Admin</h1>
                                         </div>
                                     </div>
                                 )
@@ -88,9 +100,9 @@ function UserHeader() {
                                     <a href="#" className="-m-1.5 p-1.5">
                                         <h1>LOGO</h1>
                                     </a>
-                                    <button type="button" 
+                                    <button type="button"
                                         className="-m-2.5 rounded-md p-2.5 text-gray-700"
-                                        onClick={()=>setIsSideBarVisible(false)}
+                                        onClick={() => setIsSideBarVisible(false)}
                                     >
                                         <span className="sr-only">Close menu</span>
                                         <svg className="size-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
@@ -103,6 +115,10 @@ function UserHeader() {
                                 <div className=" mt-6 flow-root">
                                     <div className="-my-6 divide-y divide-gray-500/10">
                                         <div className="space-y-2 py-6">
+                                            <a href="/" className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Home</a>
+                                            <a href="/about" className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">About</a>
+                                            <a href="/search" className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Search</a>
+
                                             <div className="-mx-3">
                                                 <button type="button"
                                                     className="flex w-full items-center justify-between rounded-lg py-2 pr-3.5 pl-3 text-base/7 font-semibold text-gray-900 hover:bg-gray-50" aria-controls="disclosure-1" aria-expanded="false"
@@ -113,21 +129,22 @@ function UserHeader() {
                                                         <path fillRule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
                                                     </svg>
                                                 </button>
-                                                
+
                                                 {/* login dropdown (mobile view) */}
                                                 {
                                                     isDropDownVisible && (
                                                         <div className="mt-2 space-y-2" id="disclosure-1">
-                                                            <a href="#" className="block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-semibold text-gray-900 hover:bg-gray-50">User</a>
-                                                            <a href="#" className="block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-semibold text-gray-900 hover:bg-gray-50">Admin</a>
+                                                            <a href="/user-login" className="block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-semibold text-gray-900 hover:bg-gray-50">User</a>
+                                                            <a href="/admin-login" className="block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-semibold text-gray-900 hover:bg-gray-50">Admin</a>
                                                         </div>
                                                     )
                                                 }
 
                                             </div>
-                                            <a href="#" className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Features</a>
-                                            <a href="#" className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Marketplace</a>
-                                            <a href="#" className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Company</a>
+                                            
+                                            <a href="/register" className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Register</a>
+                                            <a href="/feedback" className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">FeedBack</a>
+                                            
                                         </div>
                                     </div>
                                 </div>

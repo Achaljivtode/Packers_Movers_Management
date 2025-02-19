@@ -1,7 +1,4 @@
 import React, { useState } from 'react'
-// import { IndianState, USAState } from '../constant/countries'
-
-// import { countries,IndianState,AustraliaState, USAState, } from '../../constant/countries'
 import { info } from '../../constant/countries'
 
 function Register() {
