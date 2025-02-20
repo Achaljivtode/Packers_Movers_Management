@@ -8,7 +8,7 @@ function FeedBackForm() {
         <form 
             action="" 
             method="post"
-            className='border mx-auto pb-20 py-10 lg:w-[600px] md:w-[500px] sm:w-full'
+            className=' mx-auto pb-20 py-10 lg:w-[600px] md:w-[500px] sm:w-full'
         >
             <h2>Write Your Feedback</h2>
             <hr  className='mb-10'/>
