@@ -1,5 +1,4 @@
 
-
 export const info ={
     Countries : ['India','Australia','United States of America (USA)'],
     State : {
