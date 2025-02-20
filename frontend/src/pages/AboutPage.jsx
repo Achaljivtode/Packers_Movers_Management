@@ -1,8 +1,15 @@
 import React from 'react'
+import UserHeader from '../components/UserHeader/UserHeader'
+import About from '../components/About/About'
+import Footer from '../components/Footer/Footer'
 
 function AboutPage() {
   return (
-    <div>AboutPage</div>
+    <div>
+      <UserHeader />
+      <About />
+      <Footer />
+    </div>
   )
 }
 

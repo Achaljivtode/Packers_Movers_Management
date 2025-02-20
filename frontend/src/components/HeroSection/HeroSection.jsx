@@ -35,7 +35,7 @@ function HeroSection() {
               <img
                 src={image}
                 alt={`Banner ${index + 1}`}
-                className="w-full  object-contain xl:w-[1300px] lg:w-full md:w-screen sm:w-full   h-[200px] md:h-[400px] lg:h-[600px]"
+                className="w-full  object-contain xl:w-[1300px] lg:w-full md:w-full sm:w-full   h-[200px] md:h-[400px] lg:h-[600px]"
               />
             </SwiperSlide>
           ))}
@@ -52,7 +52,7 @@ function HeroSection() {
           </div>
 
           <h1 className='my-3 mt-10 font-bold text-2xl text-center'>Our Services:</h1>
-          <div className='text-left mx-auto lg:w-1/2 md:w-1/2 md:px-5 sm:w-full sm:px-5'>
+          <div className='text-left mx-auto lg:w-1/2 md:w-5/6 md:px-5 sm:w-full sm:px-5'>
 
             <p>✅ Household Shifting - Safe packing and moving of your home essentials.</p>
             <p>✅ Office Relocation - Smooth transition for your workspace with minimal downtime</p>
@@ -64,7 +64,7 @@ function HeroSection() {
 
 
           <h1 className='my-3 mt-10 font-bold text-2xl text-center'>Why Choose Us?</h1>
-          <div className=' text-left mx-auto lg:w-1/2 md:w-1/2 sm:w-full sm:px-5'>
+          <div className=' text-left mx-auto lg:w-1/2 md:w-5/6 sm:w-full sm:px-5'>
             <p>🔹 Professional Team - Trained movers with years of experience.</p>
             <p>🔹 Affordable Pricing - Transparent rates with no hidden charges.</p>
             <p>🔹 Timely Delivery - On-time pickup and drop-off services.</p>

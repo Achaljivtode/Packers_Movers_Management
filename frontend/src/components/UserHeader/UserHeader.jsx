@@ -73,8 +73,8 @@ function UserHeader() {
                                 isDropDownVisible && (
                                     <div className="absolute top-full -left-8 z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white ring-1 shadow-lg ring-gray-900/5">
                                         <div className="p-4  ">
-                                            <h1 onClick={goToUserLogin}>User</h1>
-                                            <h1 onClick={goToAdminLogin}>Admin</h1>
+                                            <h1 onClick={goToUserLogin} className='hover:bg-gray-200 hover:cursor-pointer rounded-md px-3 py-3'>User</h1>
+                                            <h1 onClick={goToAdminLogin} className='hover:bg-gray-200 hover:cursor-pointer rounded-md px-3 py-3' >Admin</h1>
                                         </div>
                                     </div>
                                 )
@@ -82,8 +82,8 @@ function UserHeader() {
 
                         </div>
 
-                        <a href="#" className="text-sm/6 font-semibold text-white">Register</a>
-                        <a href="#" className="text-sm/6 font-semibold text-white">FeedBack</a>
+                        <a href="/register" className="text-sm/6 font-semibold text-white">Register</a>
+                        <a href="/feedback" className="text-sm/6 font-semibold text-white">FeedBack</a>
                     </div>
                 </nav>
 

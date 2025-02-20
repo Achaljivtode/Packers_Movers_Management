@@ -10,6 +10,7 @@ function Card() {
                     key={index}
                     className='border-2 border-orange-200 p-5 rounded-lg shadow-md bg-orange-100 hover:cursor-pointer'
                 >
+                    <card.icon className='text-6xl text-orange-600 mx-auto my-5'/>
                     <h1 className='text-2xl text-center mb-5 font-semibold'>{card.title}</h1>
                     <p className='text-md'>{card.content}</p>
                 </div>
