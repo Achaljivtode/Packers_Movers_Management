@@ -1,17 +1,17 @@
-import { useState } from 'react'
-import { info } from '../../constant/countries'
+import { useState ,useEffect} from 'react'
+
 import { registerUser } from "../../services/api";
+import axios from "axios";
 function Register() {
-    // const [nationality, setNationality] = useState('Indian')
-    // const [country, setCountry] = useState('')
-    // const [state, setState] = useState('')
-    // const [city, setCity] = useState('')
+
+    const [choices, setChoices] = useState([]);
     const [formData, setFormData] = useState({
         username: "",
         email: "",
         register_as: "customer",
         password: "",
         password_confirm: "",
+        full_name:"",
         DOB: "",
         mobile: "",
         Nationality: "",
@@ -20,20 +20,41 @@ function Register() {
         state: "",
         city: ""
     });
+    const [message,setMessage]=useState("")
+
+    useEffect(() => {
+        axios.get('http://127.0.0.1:8000/register/')
+            .then(response => {
+                console.log("fetched choices:", response.data);
+                setChoices(response.data.register_as_choices);
+            })
+            .catch(error => console.error("Error fetching choices:", error));
+    }, []);
 
     const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+       
     };
 
     const handleSubmit = async (e) => {
-    e.preventDefault();
+    
+        e.preventDefault();
+        console.log("Register button clicked! Form submission started...")
     try {
-      const response = await registerUser(formData);
-      console.log(response.data);
-      alert("Registration Successful!");
+        const response = await registerUser(formData);
+        console.log("API Response:", response);
+        
+        if (response.id) {
+            setMessage("Registration successfull")
+            alert("Registration Successful!");
+        } else {
+            setMessage(response.error || "Registration failed. please check your input")
+        }
+      
+     
     } catch (error) {
-      console.error(error.response.data);
-      alert("Error: " + JSON.stringify(error.response.data));
+        console.error("Registration Error:", error);
+        setMessage("An error occured. Please try again")
     }
   };
 
@@ -52,6 +73,15 @@ function Register() {
                 <div className=" mt-10 sm:mx-auto sm:w-full sm:max-w-5xl ">
                     <form  onSubmit={handleSubmit} className=" space-y-6" action="#" method="POST">
                         <div className='grid grid-cols-1 md:grid-cols-2 gap-4 '>
+                            
+                            {/* username */}
+                            <div>
+                                <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">username</label>
+                                <div className="mt-2">
+                                    <input type="text" name="username" id="username" value={formData.username} autoComplete="username" onChange={handleChange} required className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
+                                </div>
+                            </div>
+
                             {/* email */}
                             <div>
                                 <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">Email address</label>
@@ -64,10 +94,18 @@ function Register() {
                             <div>
                                 <label htmlFor="registerAs" className="block text-sm/6 font-medium text-gray-900">Register As</label>
                                 <div className="mt-2">
-                                    <select name="registerAs" id="registerAs" className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" >
-                                        <option value="User">User</option>
-                                        <option value="Admin">Admin</option>
+                                    <select
+                                        name="register_as"
+                                        value={formData.register_as}
+                                        onChange={handleChange}
+                                        id="register_as"
+                                        className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" > 
+                                        <option value="">Select Role</option>
+                                            {choices.map((choice, index) => (
+                                                <option key={index} value={choice.value}>{choice.label}</option>
+                ))}
                                     </select>
+                                    
                                 </div>
                             </div>
 
@@ -88,7 +126,7 @@ function Register() {
                                     <label htmlFor="confpassword" className="block text-sm/6 font-medium text-gray-900">Confirm Password</label>
                                 </div>
                                 <div className="mt-2">
-                                    <input type="password" name="confpassword" id="confpassword" autoComplete="confpassword" value={formData.password_confirm} onChange={handleChange} required className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
+                                    <input type="password" name="password_confirm" id="password_confirm" autoComplete="password_confirm" value={formData.password_confirm} onChange={handleChange} required className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
                                 </div>
                             </div>
 
@@ -96,7 +134,7 @@ function Register() {
                             <div>
                                 <label htmlFor="name" className="block text-sm/6 font-medium text-gray-900">Full Name</label>
                                 <div className="mt-2">
-                                    <input type="text" name="name" id="name" autoComplete="name" required onChange={handleChange} className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
+                                    <input type="text" name="full_name" id="full_name" autoComplete="full_name" value={formData.full_name} required onChange={handleChange} className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
                                 </div>
                             </div>
 
@@ -112,7 +150,7 @@ function Register() {
                             <div>
                                 <label htmlFor="number" className="block text-sm/6 font-medium text-gray-900">Mobile Number </label>
                                 <div className="mt-2">
-                                    <input type="number" name="number" id="number" autoComplete="number" value={formData.mobile} onChange={handleChange} required className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
+                                    <input type="number" name="mobile" id="mobile" autoComplete="mobile" value={formData.mobile} onChange={handleChange} required className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
                                 </div>
                             </div>
 
@@ -120,55 +158,30 @@ function Register() {
                             <div>
                                 <label htmlFor="nationality" className="block text-sm/6 font-medium text-gray-900">Nationality </label>
                                 <div className="mt-2">
-                                    <input type="text" name="nationality" id="nationality" autoComplete="nationality" value={formData.Nationality} onChange={handleChange} required className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
+                                    <input type="text" name="Nationality" id="Nationality" autoComplete="Nationality" value={formData.Nationality} onChange={handleChange} required className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
                                 </div>
                             </div>
 
                             {/* country */}
                             <div>
                                 <label htmlFor="country" className="block text-sm/6 font-medium text-gray-900">Country </label>
+                               
                                 <div className="mt-2">
-                                    <select
-                                        name="country"
-                                        id="country"
-                                        className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                                        value={formData.country}
-                                        onChange={handleChange}
-                                    >
-                                        <option value="">Select a Country</option>
-                                        {
-                                            info.Countries.map((option) => (
-                                                <option key={option} value={option}  >{option}</option>
-                                            ))
-                                        }
-                                    </select>
+                                    <input type="text" name="country" id="country" autoComplete="country" value={formData.country} onChange={handleChange} required className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
                                 </div>
                             </div>
 
                             {/* State dropdown */}
                             <div>
                                 <label htmlFor="state" className="block text-sm/6 font-medium text-gray-900">State </label>
+                               
+
                                 <div className="mt-2">
-                                    <select
-                                        name="state"
-                                        id="state"
-                                        value={formData.state}
-                                        onChange={handleChange}
-                                        className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                                        // disabled={!country}
-                                    >
-                                        {/* <option value="">Select a state</option>
-                                        {country === 'India' && info.State.India.map(state => (
-                                            <option key={state} value={state}>{state}</option>
-                                        ))}
-                                        {country === 'Australia' && info.State.Australia.map(state => (
-                                            <option key={state} value={state}>{state}</option>
-                                        ))}
-                                        {country === 'United States of America (USA)' && info.State.USA.map(state => (
-                                            <option key={state} value={state}>{state}</option>
-                                        ))} */}
-                                    </select>
+                                    <input type="text" name="state" id="state" autoComplete="state" value={formData.state} onChange={handleChange} required className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
                                 </div>
+
+                                
+
                             </div>
 
 
@@ -176,52 +189,9 @@ function Register() {
                             {/* city dropdown */}
                             <div>
                                 <label htmlFor="city" className="block text-sm/6 font-medium text-gray-900">City</label>
+                              
                                 <div className="mt-2">
-                                    <select
-                                        name="city"
-                                        id="city"
-                                        value={formData.city}
-                                        className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                                        // disabled={!country}
-                                        // onChange={(e) => setCity(e.target.value)}
-                                        onChange={handleChange}
-                                    >
-                                        {/* <option value="">Select a City</option>
-
-                                        {state === 'Maharastra' && info.City.Maharastra.map(option => (
-                                            <option key={option} value={option}>{option}</option>
-                                        ))}
-                                        {state === 'Rajasthan' && info.City.Rajasthan.map(option => (
-                                            <option key={option} value={option}>{option}</option>
-                                        ))}
-                                        {state === 'Uttarakhad' && info.City.Uttarakhad.map(option => (
-                                            <option key={option} value={option}>{option}</option>
-                                        ))}
-                                        {state === 'Goa' && info.City.Goa.map(option => (
-                                            <option key={option} value={option}>{option}</option>
-                                        ))}
-                                        {state === 'New South Wales' && info.City.NewSouthWales.map(option => (
-                                            <option key={option} value={option}>{option}</option>
-                                        ))}
-                                        {state === 'Victoria' && info.City.Victoria.map(option => (
-                                            <option key={option} value={option}>{option}</option>
-                                        ))}
-                                        {state === 'Queensland' && info.City.Queensland.map(option => (
-                                            <option key={option} value={option}>{option}</option>
-                                        ))}
-                                        {state === 'Florida' && info.City.Florida.map(option => (
-                                            <option key={option} value={option}>{option}</option>
-                                        ))}
-                                        {state === 'Georgia' && info.City.Georgia.map(option => (
-                                            <option key={option} value={option}>{option}</option>
-                                        ))}
-                                        {state === 'Lowa' && info.City.Lowa.map(option => (
-                                            <option key={option} value={option}>{option}</option>
-                                        ))}
-                                        {state === 'Alaska' && info.City.Alaska.map(option => (
-                                            <option key={option} value={option}>{option}</option>
-                                        ))} */}
-                                    </select>
+                                    <input type="text" name="city" id="city" autoComplete="city" value={formData.city} onChange={handleChange} required className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
                                 </div>
                             </div>
 
@@ -229,7 +199,7 @@ function Register() {
                             <div>
                                 <label htmlFor="address" className="block text-sm/6 font-medium text-gray-900">Address</label>
                                 <div className="mt-2">
-                                    <input type="text" name="address" id="address" autoComplete="address" value={formData.Address} onChange={handleChange} required className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
+                                    <input type="text" name="Address" id="Address" autoComplete="Address" value={formData.Address} onChange={handleChange} required className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
                                 </div>
                             </div>
 
@@ -242,6 +212,7 @@ function Register() {
                             <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Register</button>
                         </div>
                     </form>
+                     {message && <p>{message}</p>}
 
                     <p className="mt-10 text-center text-sm/6 text-gray-500">
                         Already a member?

@@ -2,12 +2,15 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 # Create your models here.
 class CustomUser(AbstractUser):
-    register_as_choice=[        
+
+    REGISTER_AS_CHOICES=[        
         ('admin','admin'),
         ('agent','agent'),
         ('customer','customer'),
                         ]
-    register_as=models.CharField(max_length=10,choices=register_as_choice,default='customer')
+    register_as=models.CharField(max_length=10,choices=REGISTER_AS_CHOICES,default='customer')
+
+    full_name=models.CharField(max_length=150,default="-")
 
     DOB=models.DateField(null=True, blank=True)
 
@@ -18,13 +21,13 @@ class CustomUser(AbstractUser):
         blank=True,
     )
 
-    Nationality=models.CharField(max_length=100)
+    Nationality=models.CharField(max_length=100,default="-")
 
-    Address=models.CharField(max_length=200)
+    Address=models.CharField(max_length=200,default="-")
 
-    country=models.CharField(max_length=100)
-    state=models.CharField(max_length=100)
-    city=models.CharField(max_length=100)
+    country=models.CharField(max_length=100,default="-")
+    state=models.CharField(max_length=100,default="-")
+    city=models.CharField(max_length=100,default="-")
 
     groups = models.ManyToManyField(
         "auth.Group",
