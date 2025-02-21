@@ -1,12 +1,12 @@
 import React from 'react'
-import UserHeader from '../components/UserHeader/UserHeader'
+import Header from '../components/Header/Header'
 import About from '../components/About/About'
 import Footer from '../components/Footer/Footer'
 
 function AboutPage() {
   return (
     <div>
-      <UserHeader />
+      <Header />
       <About />
       <Footer />
     </div>

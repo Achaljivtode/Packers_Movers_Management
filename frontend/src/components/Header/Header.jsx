@@ -2,7 +2,7 @@ import  { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 
-function UserHeader() {
+function Header() {
     const [isDropDownVisible, setIsDropDownVisible] = useState(false);
     const [isSideBarVisible, setIsSideBarVisible] = useState(false);
 
@@ -158,4 +158,4 @@ function UserHeader() {
     )
 }
 
-export default UserHeader
+export default Header

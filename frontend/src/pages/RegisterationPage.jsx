@@ -1,11 +1,11 @@
 import React from 'react'
 import Register from '../components/Register/Register'
-import UserHeader from '../components/UserHeader/UserHeader'
+import Header from '../components/Header/Header'
 
 function RegisterationPage() {
   return (
     <div>
-        <UserHeader />
+        <Header />
         <Register />
     </div>
   )

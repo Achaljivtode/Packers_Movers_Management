@@ -1,12 +1,12 @@
 import React from 'react'
-import UserHeader from '../components/UserHeader/UserHeader'
+import Header from '../components/Header/Header'
 import Footer from '../components/Footer/Footer'
 import FeedBackForm from '../components/FeedBackForm/FeedBackForm'
 
 function FeedBackPage() {
   return (
     <div>
-      <UserHeader />
+      <Header />
       <FeedBackForm />
       <Footer />
     </div>

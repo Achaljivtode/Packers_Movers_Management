@@ -6,6 +6,8 @@ import HomePage from '../pages/HomePage';
 import AboutPage from '../pages/AboutPage';
 import SearchPage from '../pages/SearchPage';
 import FeedBackPage from '../pages/FeedBackPage';
+import ServiceRegisterPage from '../pages/ServiceRegisterPage';
+import QuatationReportPage from '../pages/QuatationReportPage';
 
 const route = createBrowserRouter([
     { path: '' , element: <HomePage /> },
@@ -15,6 +17,8 @@ const route = createBrowserRouter([
     { path: '/admin-login' , element: <LoginPage /> },
     { path: '/register' , element: <RegisterationPage /> },
     { path: '/feedback' , element: <FeedBackPage /> },
+    { path: '/service-registration' , element: <ServiceRegisterPage /> },
+    { path: '/quatation' , element: <QuatationReportPage /> },
 ])
 
 export default route
