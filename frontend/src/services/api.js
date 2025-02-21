@@ -6,12 +6,16 @@ export const registerUser = async (userData) => {
   try {
     const response = await axios.post(`${API_URL}register/`, userData);
     return response.data; //success response
-  }catch (error){
+  } catch (error) {
     return error.response?.data || { error: "something went wrong" };
   }
- 
 };
 
 export const loginUser = async (loginData) => {
-  return axios.post(`${API_URL}login/`, loginData);
+  try {
+    const response = await axios.post(`${API_URL}login/`, loginData);
+    return response.data; // Return successful response
+  } catch (error) {
+    return error.response?.data || { error: "Invalid login attempt" };
+  }
 };

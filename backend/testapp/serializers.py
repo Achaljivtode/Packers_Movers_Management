@@ -37,11 +37,12 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         validated_data.pop('password_confirm')
+        password = validated_data['password'] 
         user=User.objects.create_user(
             username=validated_data['username'],
             email=validated_data['email'],
             register_as=validated_data['register_as'],
-            password=validated_data['password'],
+            password=password,  # Pass raw password (it will be hashed)
             full_name=validated_data['full_name'],
             DOB=validated_data['DOB'],
             mobile=validated_data['mobile'],
@@ -51,4 +52,6 @@ class RegisterSerializer(serializers.ModelSerializer):
             state=validated_data['state'],
             city=validated_data['city'],
         )
+        user.set_password(password)  # Hash password before saving
+        user.save()
         return user

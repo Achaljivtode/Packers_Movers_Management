@@ -25,16 +25,32 @@ class RegisterView(APIView):
     
 class LoginView(APIView):
     def post(self,request):
-        username = request.data.get('username')
+        email = request.data.get('email')
         password = request.data.get('password')
 
-        user = authenticate(username=username,password=password)
+        # try:
+        #     user = User.objects.get(email=email)  # Find user by email
+        #     user = authenticate(username=user.username, password=password)  # Authenticate with username
+        # except User.DoesNotExist:
+        #     user = None
+        try:
+            user = User.objects.get(email=email)  # Find user by email
+            user = authenticate(username=user.username, password=password)  # Authenticate using username
+        except User.DoesNotExist:
+            return Response({"error": "Invalid email or password"}, status=status.HTTP_400_BAD_REQUEST)
+        
 
         if user:
             refresh = RefreshToken.for_user(user)
             return Response({
                 "message":"Login Succesfull !",
                 "token":str(refresh.access_token),
-                "user":UserSerializer(user).data})
+                "user": {
+                    "id": user.id,
+                    "username": user.username,
+                    "email": user.email,
+                    "register_as": user.register_as  # Identify role
+                }
+            },status=status.HTTP_200_OK)
         return Response({"error":"Invalid Credentials"},status=status.HTTP_400_BAD_REQUEST)
 
