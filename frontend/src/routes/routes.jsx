@@ -8,6 +8,10 @@ import SearchPage from '../pages/SearchPage';
 import FeedBackPage from '../pages/FeedBackPage';
 import ServiceRegisterPage from '../pages/ServiceRegisterPage';
 import QuatationReportPage from '../pages/QuatationReportPage';
+import AdminDashboardPage from '../pages/AdminDashboardPage';
+import AgentDashboardPage from '../pages/AgentDashboardPage';
+import UserDashboardPage from '../pages/UserDashboardPage';
+import QuatationEntryPage from '../pages/QuatationEntryPage';
 
 const route = createBrowserRouter([
     { path: '' , element: <HomePage /> },
@@ -18,7 +22,11 @@ const route = createBrowserRouter([
     { path: '/register' , element: <RegisterationPage /> },
     { path: '/feedback' , element: <FeedBackPage /> },
     { path: '/service-registration' , element: <ServiceRegisterPage /> },
-    { path: '/quatation' , element: <QuatationReportPage /> },
+    { path: '/quatation-report' , element: <QuatationReportPage /> },
+    { path: '/quatation-register' , element: <QuatationEntryPage /> },
+    { path: '/admin-dashboard' , element: <AdminDashboardPage /> },
+    { path: '/agent-dashboard' , element: <AgentDashboardPage /> },
+    { path: '/user-dashboard' , element: <UserDashboardPage /> },
 ])
 
 export default route
