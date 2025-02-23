@@ -14,11 +14,36 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
+from django.conf import settings
+from django.conf.urls.static import static
+
 from django.contrib import admin
 from django.urls import path
-from testapp.views import RegisterView,LoginView
+from testapp.views import (
+    RegisterView,LoginView,
+    AdminDashboardView,
+    AgentDashboardView,
+    CustomerDashboardView,
+    CreateOrderView,
+    UpdateOrderView,
+    OrderListView,
+    ServiceCreateView
+    )
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/',RegisterView.as_view(),name='register'),
     path('login/',LoginView.as_view(),name='login'),
-]
+    path('admin-dashboard/', AdminDashboardView.as_view(), name='admin-dashboard'),
+    path('agent-dashboard/', AgentDashboardView.as_view(), name='agent-dashboard'),
+    path('customer-dashboard/', CustomerDashboardView.as_view(), name='customer-dashboard'),
+    path('orders/create/', CreateOrderView.as_view(), name='create-order'),
+    path('orders/<int:order_id>/update/', UpdateOrderView.as_view(), name='update-order'),
+    path('orders/', OrderListView.as_view(), name='list-orders'),
+    path("services/register/", ServiceCreateView.as_view(), name="service-register"),
+    
+] 
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -42,12 +42,21 @@ INSTALLED_APPS = [
     'corsheaders'
 ]
 
+
+AUTHENTICATION_BACKENDS = [
+    'testapp.authentication.EmailBackend',  # Custom backend using email
+    'django.contrib.auth.backends.ModelBackend',  # Default username-based auth
+]
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',
+    ),
 }
-AUTH_USER_MODEL = "testapp.CustomUser" 
+AUTH_USER_MODEL = 'testapp.CustomUser' 
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
@@ -89,7 +98,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'pack_move_db',
         'USER': 'root',
-        'PASSWORD': 'mohitjodhe2003',
+        'PASSWORD': 'mysql123',
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -143,3 +152,8 @@ CORS_ALLOWED_ORIGINS = [
 CORS_ALLOW_CREDENTIALS = True
 
 DEBUG = True
+
+
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
