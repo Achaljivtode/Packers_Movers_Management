@@ -1,5 +1,7 @@
 import React from 'react'
 import Header from '../components/Header/Header'
+import SearchAgent from '../components/Search/SearchAgent'
+import Footer from '../components/Footer/Footer'
 
 function SearchPage() {
   return (
@@ -9,6 +11,8 @@ function SearchPage() {
       <p
         className='my-5  text-center text-xl text-gray-500 font-semibold'
       >There are available Packers and Movers Agent. Kindly click on the packers and movers to see the details of it.</p>
+      <SearchAgent />
+      <Footer />
     </div>
   )
 }
