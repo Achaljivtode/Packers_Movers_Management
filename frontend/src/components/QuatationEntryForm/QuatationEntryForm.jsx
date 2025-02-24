@@ -52,8 +52,9 @@ const QuatationEntryForm = () => {
             name="service"
             id="service"
             className="border-1 border-gray-400 rounded-sm w-3/5 p-2"
+            required
           >
-            <option value="">Select Servicer</option>
+            <option value="">Select Service</option>
             <option value="Office Shifting">Office Shifting</option>
             <option value="House Shifting">House Shifting</option>
             <option value="Car Shifting">Car Shifting</option>
@@ -76,6 +77,7 @@ const QuatationEntryForm = () => {
             value={formData.pickup_location}
             className="border-1 border-gray-400 rounded-sm w-3/5 p-2"
             placeholder="Shift From Address"
+            required
           />
         </div>
         <div className="flex flex-row mt-5">
@@ -93,6 +95,7 @@ const QuatationEntryForm = () => {
             value={formData.drop_location}
             className="border-1 border-gray-400 rounded-sm w-3/5 p-2"
             placeholder="Shift To Address"
+            required
           />
         </div>
         <div className="flex flex-row mt-5">
@@ -109,7 +112,8 @@ const QuatationEntryForm = () => {
             onChange={handleChange}
             value={formData.Reference}
             className="border-1 border-gray-400 rounded-sm w-3/5 p-2"
-            placeholder="Shift To Address"
+            placeholder="Reference"
+            required
           />
         </div>
         <div className="flex flex-row mt-5">
@@ -126,7 +130,8 @@ const QuatationEntryForm = () => {
             onChange={handleChange}
             value={formData.details_of_service}
             className="border-1 border-gray-400 rounded-sm w-3/5 p-2"
-            placeholder="Shift To Address"
+            placeholder='Enter the details '
+            required
           />
         </div>
         {/* <div className="flex flex-row mt-5">

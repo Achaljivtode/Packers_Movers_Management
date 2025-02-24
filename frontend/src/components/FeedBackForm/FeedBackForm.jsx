@@ -6,7 +6,7 @@ function FeedBackForm() {
         <h1 className=' text-center text-2xl font-bold mt-10'>FeedBack Form</h1>
 
         <form 
-            action="" 
+            action="customer-dashboard" 
             method="post"
             className=' mx-auto pb-20 py-10 lg:w-[600px] md:w-[500px] sm:w-full'
         >
@@ -16,19 +16,19 @@ function FeedBackForm() {
                 <div className=' w-full mb-3'>
                     <p className='mb-1 mt-5'>Full Name: </p>
                     <input type="text" name="feed_name" id="feed_name" 
-                        className='border-1 border-gray-400 w-full p-1'
+                        className='border-1 border-gray-400 w-full p-1' required
                     />
                 </div>
                 <div className=' w-full mb-3'>
                     <p className='mb-1 mt-5'>Email Id: </p>
                     <input type="email" name="feed_email" id="feed_email" 
-                        className='border-1 border-gray-400 w-full p-1'
+                        className='border-1 border-gray-400 w-full p-1' required
                     />
                 </div>
                 <div className=' w-full mb-3'>
                     <p className='mb-1 mt-5'>Select Rating: </p>
                     <select name="feed_rating" id="feed_rating"
-                        className='border-1 border-gray-400 w-full p-1'
+                        className='border-1 border-gray-400 w-full p-1' required
                     >
                         <option value="">Select rating</option>
                         <option value="1-star">1-star</option>
@@ -40,7 +40,7 @@ function FeedBackForm() {
                 </div>
                 <div className=' w-full mb-3'>
                     <p className='mb-1 mt-5'>Write Your Feedback: </p>
-                    <textarea name="feed_msg" id="feed_msg" rows={2} cols={20} className='border-1 border-gray-400 px-3 w-full' />
+                    <textarea name="feed_msg" id="feed_msg" rows={2} cols={20} className='border-1 border-gray-400 px-3 w-full' required />
                 </div>
                 <div className='w-full mb-3'>
                     <input type="submit" value={'Submit'} className='border w-full p-2 bg-orange-400 text-white text-xl font-semibold' />

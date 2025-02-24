@@ -11,6 +11,8 @@ import AdminDashboardPage from "../pages/AdminDashboardPage";
 import AgentDashboardPage from "../pages/AgentDashboardPage";
 import UserDashboardPage from "../pages/UserDashboardPage";
 import QuatationEntryPage from "../pages/QuatationEntryPage";
+import ManageOrdersPage from "../pages/ManageOrdersPage";
+import PlaceOrderPage from "../pages/PlaceOrderPage";
 
 const route = createBrowserRouter([
     { path: '' , element: <HomePage /> },
@@ -28,6 +30,9 @@ const route = createBrowserRouter([
     { path: '/admin-dashboard' , element: <AdminDashboardPage /> },
     { path: '/agent-dashboard' , element: <AgentDashboardPage /> },
     { path: '/customer-dashboard' , element: <UserDashboardPage /> },
+    { path: '/manage' , element: <ManageOrdersPage /> },
+    { path: '/place-order' , element: <PlaceOrderPage /> },
+
 ])
 
 export default route;
