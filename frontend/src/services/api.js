@@ -54,9 +54,17 @@ export const fetchOrders = async () => {
 
 export const placeOrder = async (orderData) => {
   try {
-    const response = await axios.post(`${API_URL}orders/create/`, orderData, {
-      headers: { Authorization: `Bearer ${getToken()}` },
-    });
+    const response = await axios.post(
+      `${API_URL}orders/create/`,
+
+      {
+        ...orderData,
+        select_service: parseInt(orderData.select_service), //send service id
+      },
+      {
+        headers: { Authorization: `Bearer ${getToken()}` },
+      }
+    );
     console.log("order placed succesfuuly");
     return response.data;
   } catch (error) {
@@ -79,6 +87,16 @@ export const updateOrder = async (orderId, status) => {
   }
 };
 
+export const fetchServices = async () => {
+  try {
+    const response = await axios.get(`${API_URL}services/`);
+    return response.data; //Return list of Services
+  } catch (error) {
+    console.error("Error fetching services:", error);
+    return [];
+  }
+};
+
 export const registerService = async (serviceData) => {
   try {
     const response = await axios.post(
@@ -91,9 +109,12 @@ export const registerService = async (serviceData) => {
         },
       }
     );
+    // return { success: true };
+    alert("Service Registration Successfull");
     return response.data;
   } catch (error) {
     console.error("Error registering service:", error.response?.data || error);
+    alert("Error Registering Service", error);
     return error.response?.data || { error: "Something went wrong" };
   }
 };

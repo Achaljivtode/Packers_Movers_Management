@@ -28,6 +28,7 @@ from testapp.views import (
     CreateOrderView,
     UpdateOrderView,
     OrderListView,
+    ServiceListView,
     ServiceCreateView
     )
 
@@ -41,6 +42,7 @@ urlpatterns = [
     path('orders/create/', CreateOrderView.as_view(), name='create-order'),
     path('orders/<int:order_id>/update/', UpdateOrderView.as_view(), name='update-order'),
     path('orders/', OrderListView.as_view(), name='list-orders'),
+    path('services/', ServiceListView.as_view(), name='service-list'),
     path("services/register/", ServiceCreateView.as_view(), name="service-register"),
     
 ] 

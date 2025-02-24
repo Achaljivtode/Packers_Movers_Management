@@ -61,11 +61,15 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 class OrderSerializer(serializers.ModelSerializer):
     customer_name=serializers.CharField(source="customer.username",read_only=True)
+    customer_email=serializers.CharField(source="customer.email",read_only=True)
+    customer_mobile=serializers.CharField(source="customer.mobile",read_only=True)
     agent_name=serializers.CharField(source="agent.username",read_only=True)
+    select_service= serializers.PrimaryKeyRelatedField(queryset=Service.objects.all(),write_only=True)
+    service_name=serializers.CharField(source="select_service.service_name",read_only=True)
 
     class Meta:
         model=Order
-        fields=["id","customer_id","customer_name","agent","agent_name","select_service","pickup_location","drop_location","created_at","Reference","details_of_service","status",]
+        fields=["id","customer_id","customer_name","customer_email","customer_mobile","agent","agent_name","select_service","service_name","pickup_location","drop_location","created_at","Reference","details_of_service","status",]
 
 
     def create(self, validated_data):

@@ -52,30 +52,7 @@ class CustomUser(AbstractUser):
 
 User = get_user_model()
 
-########### Quotation Table#########
-class Order(models.Model):
-    STATUS_CHOICES=[
-        ("Pending","Pending"),
-        ("Accepted","Accepted"),
-        ("Rejected","Rejected"),
-        ("Completed","Completed"),
-    ]
 
-    customer=models.ForeignKey(User,on_delete=models.CASCADE,related_name="customer_orders")
-   
-    agent=models.ForeignKey(User,on_delete=models.SET_NULL,null=True,blank=True,related_name="agent_orders")
-    select_service=models.CharField(max_length=255,default="office_shifting",null=True,blank=True)
-    pickup_location=models.CharField(max_length=255)
-    drop_location=models.CharField(max_length=255)
-    created_at=models.DateTimeField(auto_now_add=True)
-    Reference=models.CharField(max_length=255,null=True,blank=True,)
-    details_of_service=models.CharField(max_length=255,null=True,blank=True,)
-    status=models.CharField(max_length=10,choices=STATUS_CHOICES,default="Pending")
-   
-
-    def __str__(self):
-        return f"Order {self.id} - {self.status}"
-    
 
 ######################Service Table#####################
 class Service(models.Model):
@@ -93,4 +70,27 @@ class Service(models.Model):
         return f"Service {self.id} "
 
 
+########### Quotation Table#########
+class Order(models.Model):
+    STATUS_CHOICES=[
+        ("Pending","Pending"),
+        ("Accepted","Accepted"),
+        ("Rejected","Rejected"),
+        ("Completed","Completed"),
+    ]
+
+    customer=models.ForeignKey(User,on_delete=models.CASCADE,related_name="customer_orders")
    
+    agent=models.ForeignKey(User,on_delete=models.SET_NULL,null=True,blank=True,related_name="agent_orders")
+    select_service=models.ForeignKey(Service,on_delete=models.SET_NULL,null=True,blank=True,)
+    pickup_location=models.CharField(max_length=255)
+    drop_location=models.CharField(max_length=255)
+    created_at=models.DateTimeField(auto_now_add=True)
+    Reference=models.CharField(max_length=255,null=True,blank=True,)
+    details_of_service=models.CharField(max_length=255,null=True,blank=True,)
+    status=models.CharField(max_length=10,choices=STATUS_CHOICES,default="Pending")
+   
+
+    def __str__(self):
+        return f"Order {self.id} - {self.status}"
+    

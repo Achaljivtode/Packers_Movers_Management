@@ -3,7 +3,7 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from django.contrib.auth import get_user_model
 from rest_framework.response  import Response
 from rest_framework.views import APIView
-from rest_framework import status
+from rest_framework import status,generics
 from django.contrib.auth import authenticate
 from .serializers import UserSerializer,RegisterSerializer,OrderSerializer,ServiceSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -108,6 +108,7 @@ class CreateOrderView(APIView):
         serializer=OrderSerializer(data=request.data,context={"request":request})
         if serializer.is_valid():
             # serializer.save()
+            
             order=serializer.save()
             return Response({"message":"order  Placed Successfully!","order":serializer.data},status=status.HTTP_201_CREATED)
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
@@ -148,3 +149,6 @@ class ServiceCreateView(APIView):
             )
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
+class ServiceListView(generics.ListAPIView):
+    queryset = Service.objects.all()
+    serializer_class = ServiceSerializer

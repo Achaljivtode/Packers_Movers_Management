@@ -113,11 +113,14 @@ function Quotation() {
         ALL QUOTATION REPORT
       </h1>
 
-      <table className="mx-auto lg:w-[1000px] md:w-full sm:w-full">
+      <table className="mx-auto lg:w-[1400px] md:w-full sm:w-full">
         <thead>
           <tr>
             <th className="border p-2 font-normal bg-orange-400 text-white">
               ID
+            </th>
+            <th className="border p-2 font-normal bg-orange-400 text-white">
+              Customer
             </th>
             <th className="border p-2 font-normal bg-orange-400 text-white">
               Service Name
@@ -127,6 +130,12 @@ function Quotation() {
             </th>
             <th className="border p-2 font-normal bg-orange-400 text-white">
               Drop
+            </th>
+            <th className="border p-2 font-normal bg-orange-400 text-white">
+              Contact
+            </th>
+            <th className="border p-2 font-normal bg-orange-400 text-white">
+              Email
             </th>
             <th className="border p-2 font-normal bg-orange-400 text-white">
               Date
@@ -157,9 +166,12 @@ function Quotation() {
             orders.map((order) => (
               <tr key={order.id}>
                 <td className="border p-2">{order.id}</td>
-                <td className="border p-2">{order.select_service}</td>
+                <td className="border p-2">{order.customer_name}</td>
+                <td className="border p-2">{order.service_name}</td>
                 <td className="border p-2">{order.pickup_location}</td>
                 <td className="border p-2">{order.drop_location}</td>
+                <td className="border p-2">{order.customer_mobile}</td>
+                <td className="border p-2">{order.customer_email}</td>
                 {/* <td className="border p-2">{order.Reference}</td> */}
                 <td className="border p-2">{order.created_at}</td>
                 {/* <td className="border p-2">{order.details_of_service}</td> */}

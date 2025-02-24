@@ -6,7 +6,7 @@ const ServiceRegisterForm = () => {
     service_name: "",
     service_image: null,
     status: "",
-    description: "",
+    Description: "",
   });
 
   const [error, setError] = useState("");
@@ -22,10 +22,11 @@ const ServiceRegisterForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (
       !formData.service_name ||
       !formData.status ||
-      !formData.description ||
+      !formData.Description ||
       !formData.service_image
     ) {
       setError("All fields are required!");
@@ -39,19 +40,28 @@ const ServiceRegisterForm = () => {
     serviceData.append("service_name", formData.service_name);
     serviceData.append("service_image", formData.service_image);
     serviceData.append("status", formData.status);
-    serviceData.append("Description", formData.description);
+    serviceData.append("Description", formData.Description);
 
     try {
-      await registerService(serviceData);
-      setSuccessMessage("Service registered successfully!");
+      const response = await registerService(serviceData);
+      // alert("Service Register Successfully");
+      if (response.error) {
+        setError(response.error);
+        return;
+      }
+      // setSuccessMessage("Service registered successfully!");
+
       setFormData({
         service_name: "",
         service_image: null,
         status: "",
-        description: "",
+        Description: "",
       });
+
+      document.getElementById("service_image").value = "";
     } catch (error) {
-      setError("Error registering service.");
+      setError(error.response?.data?.error || "Error registering service.");
+      alert("Service Registration Failed.Please Try Again");
     }
   };
 
@@ -120,9 +130,9 @@ const ServiceRegisterForm = () => {
             Description:
           </label>
           <textarea
-            id="description"
-            name="description"
-            value={formData.description}
+            id="Description"
+            name="Description"
+            value={formData.Description}
             onChange={handleChange}
             className="border-1  border-gray-400 w-3/5  ml-5 p-1 rounded-md"
             placeholder="Enter service description"
