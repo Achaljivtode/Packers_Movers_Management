@@ -92,6 +92,7 @@ const ServiceRegisterForm = () => {
             onChange={handleChange}
             className="border-1  border-gray-400 w-3/5  ml-5 p-1 rounded-md"
             placeholder="Enter service name"
+            required
           />
         </div>
 
@@ -105,6 +106,7 @@ const ServiceRegisterForm = () => {
             name="service_image"
             onChange={handleFileChange}
             className="border-1  border-gray-400 w-3/5  ml-5 p-1 rounded-md"
+            required
           />
         </div>
 
@@ -118,6 +120,7 @@ const ServiceRegisterForm = () => {
             value={formData.status}
             onChange={handleChange}
             className="border-1  border-gray-400 w-3/5  ml-5 p-1 rounded-md"
+            required
           >
             <option value="">Select Status</option>
             <option value="Active">Active</option>
@@ -136,6 +139,7 @@ const ServiceRegisterForm = () => {
             onChange={handleChange}
             className="border-1  border-gray-400 w-3/5  ml-5 p-1 rounded-md"
             placeholder="Enter service description"
+            required
           />
         </div>
 
