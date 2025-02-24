@@ -19,9 +19,10 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setMessage("");
+
     try {
-      const response = await loginUser(formData); // Call API
-      console.log("Login Success:", response.data);
+      const response = await loginUser(formData);
 
       if (response.token) {
         localStorage.setItem("token", response.token); // Save JWT token
@@ -29,23 +30,20 @@ function Login() {
 
         // Redirect based on role
         if (response.user.register_as === "admin") {
-          console.log("admin");
+          // console.log("admin");
           navigate("/admin-dashboard");
         } else if (response.user.register_as === "agent") {
-          console.log("agent");
+          // console.log("agent");
           navigate("/agent-dashboard");
-        } else if (response.user.register_as === "customer") {
-          console.log("customer");
+        } else {
           navigate("/customer-dashboard");
         }
       } else {
         setMessage(response.error || "Invalid credentials ! please try agsain");
       }
     } catch (error) {
-      console.error("Login failed:", error.response?.data || error.message);
-      setMessage(
-        error.response?.data?.error || "Invalid Credentials! Please try again."
-      );
+      console.error("Login failed:", error);
+      setMessage(error.error || "Invalid Credentials! Please try again.");
     }
   };
 

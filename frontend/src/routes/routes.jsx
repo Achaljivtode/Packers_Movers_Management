@@ -1,17 +1,16 @@
-
-import { createBrowserRouter } from 'react-router-dom';
-import RegisterationPage from '../pages/RegisterationPage';
-import LoginPage from '../pages/LoginPage';
-import HomePage from '../pages/HomePage';
-import AboutPage from '../pages/AboutPage';
-import SearchPage from '../pages/SearchPage';
-import FeedBackPage from '../pages/FeedBackPage';
-import ServiceRegisterPage from '../pages/ServiceRegisterPage';
-import QuatationReportPage from '../pages/QuatationReportPage';
-import AdminDashboardPage from '../pages/AdminDashboardPage';
-import AgentDashboardPage from '../pages/AgentDashboardPage';
-import UserDashboardPage from '../pages/UserDashboardPage';
-import QuatationEntryPage from '../pages/QuatationEntryPage';
+import { createBrowserRouter } from "react-router-dom";
+import RegisterationPage from "../pages/RegisterationPage";
+import LoginPage from "../pages/LoginPage";
+import HomePage from "../pages/HomePage";
+import AboutPage from "../pages/AboutPage";
+import SearchPage from "../pages/SearchPage";
+import FeedBackPage from "../pages/FeedBackPage";
+import ServiceRegisterPage from "../pages/ServiceRegisterPage";
+import QuatationReportPage from "../pages/QuatationReportPage";
+import AdminDashboardPage from "../pages/AdminDashboardPage";
+import AgentDashboardPage from "../pages/AgentDashboardPage";
+import UserDashboardPage from "../pages/UserDashboardPage";
+import QuatationEntryPage from "../pages/QuatationEntryPage";
 
 const route = createBrowserRouter([
     { path: '' , element: <HomePage /> },
@@ -31,4 +30,4 @@ const route = createBrowserRouter([
     { path: '/customer-dashboard' , element: <UserDashboardPage /> },
 ])
 
-export default route
+export default route;

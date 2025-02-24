@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
+from testapp.models import Order,Service
+
 User=get_user_model()
 
 class UserSerializer(serializers.ModelSerializer):
@@ -55,3 +57,35 @@ class RegisterSerializer(serializers.ModelSerializer):
         user.set_password(password)  # Hash password before saving
         user.save()
         return user
+    
+
+class OrderSerializer(serializers.ModelSerializer):
+    customer_name=serializers.CharField(source="customer.username",read_only=True)
+    agent_name=serializers.CharField(source="agent.username",read_only=True)
+
+    class Meta:
+        model=Order
+        fields=["id","customer_id","customer_name","agent","agent_name","select_service","pickup_location","drop_location","created_at","Reference","details_of_service","status",]
+
+
+    def create(self, validated_data):
+        customer= self.context["request"].user  # Get logged-in user as customer
+        agent = validated_data.get("agent")  # Optional agent assignment
+
+        order = Order.objects.create(
+            customer=customer,
+            agent=agent,
+            select_service=validated_data["select_service"],
+            pickup_location=validated_data["pickup_location"],
+            drop_location=validated_data["drop_location"],
+            Reference=validated_data["Reference"],
+            details_of_service=validated_data["details_of_service"],
+            status=validated_data.get("status", "Pending")
+        )
+        return order
+        
+class ServiceSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model=Service
+        fields = "__all__"
