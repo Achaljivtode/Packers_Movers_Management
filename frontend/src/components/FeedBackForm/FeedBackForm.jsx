@@ -42,6 +42,9 @@ function FeedBackForm() {
                     <p className='mb-1 mt-5'>Write Your Feedback: </p>
                     <textarea name="feed_msg" id="feed_msg" rows={2} cols={20} className='border-1 border-gray-400 px-3 w-full' />
                 </div>
+                <div className='w-full mb-3'>
+                    <input type="submit" value={'Submit'} className='border w-full p-2 bg-orange-400 text-white text-xl font-semibold' />
+                </div>
             </div>
 
         </form>

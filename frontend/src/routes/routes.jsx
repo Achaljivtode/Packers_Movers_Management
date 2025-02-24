@@ -17,7 +17,9 @@ const route = createBrowserRouter([
     { path: '' , element: <HomePage /> },
     { path: '/about' , element: <AboutPage /> },
     { path: '/search' , element: <SearchPage /> },
+    { path: '/find-agent' , element: <SearchPage /> },
     { path: '/user-login' , element: <LoginPage /> },
+    { path: '/agent-login' , element: <LoginPage /> },
     { path: '/admin-login' , element: <LoginPage /> },
     { path: '/register' , element: <RegisterationPage /> },
     { path: '/feedback' , element: <FeedBackPage /> },
@@ -26,7 +28,7 @@ const route = createBrowserRouter([
     { path: '/quatation-register' , element: <QuatationEntryPage /> },
     { path: '/admin-dashboard' , element: <AdminDashboardPage /> },
     { path: '/agent-dashboard' , element: <AgentDashboardPage /> },
-    { path: '/user-dashboard' , element: <UserDashboardPage /> },
+    { path: '/customer-dashboard' , element: <UserDashboardPage /> },
 ])
 
 export default route

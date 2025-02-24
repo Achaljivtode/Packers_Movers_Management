@@ -34,7 +34,7 @@ function Login() {
         } else if (response.user.register_as === "agent") {
           console.log("agent");
           navigate("/agent-dashboard");
-        } else {
+        } else if (response.user.register_as === "customer") {
           console.log("customer");
           navigate("/customer-dashboard");
         }
