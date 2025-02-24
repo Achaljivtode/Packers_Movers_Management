@@ -121,7 +121,7 @@ export const registerService = async (serviceData) => {
 
 export const fetchAgents = async () => {
   try {
-    const response = await axios.get(`${API_URL}search-agents/`, {
+    const response = await axios.get(`${API_URL}find-agent/`, {
       headers: { Authorization: `Bearer ${getToken()}` },
     });
     console.log("Fetched Agents:", response.data);
