@@ -1,7 +1,17 @@
 const dashboard = {
-    user: [],
-    agent: [],
-    admin: {
+    'user': {
+        'Find Packers And Movers' : { link: '/find-agent' },
+        'Register Quatation' : { link: '/quatation-register' },
+        'Submit Feedback' : { link: '/feedback' },
+        'My Account' : { link: '/register' },
+        'Logout' : { link: '/' }
+    },
+    'agent': {
+        'View Quatation': { link: '/view-quatation'},
+        'My Account': { link: '/register'},
+        'Logout': { link: '/'}
+    },
+    'admin': {
         'Quatation Management': { 'link': '/quatation-management' },
         'Service Management': { 'link': '/service-management' },
         'Feedback Management': { 'link': '/feedback-management' },
@@ -10,5 +20,6 @@ const dashboard = {
         'Reports': { 'link': '/reports' },
     }
 }
+
 
 export default dashboard

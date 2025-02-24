@@ -36,7 +36,6 @@ function Login() {
           // console.log("agent");
           navigate("/agent-dashboard");
         } else {
-          // console.log("customer");
           navigate("/customer-dashboard");
         }
       } else {
