@@ -14,7 +14,7 @@ function SearchPage() {
       <SearchAgent />
       <Footer />
     </div>
-  )
+  );
 }
 
-export default SearchPage
+export default SearchPage;

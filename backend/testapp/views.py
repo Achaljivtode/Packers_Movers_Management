@@ -152,3 +152,12 @@ class ServiceCreateView(APIView):
 class ServiceListView(generics.ListAPIView):
     queryset = Service.objects.all()
     serializer_class = ServiceSerializer
+
+
+class AgentListView(ListAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class=UserSerializer
+
+    def get_queryset(self):
+        return User.objects.filter(register_as="agent")
+        

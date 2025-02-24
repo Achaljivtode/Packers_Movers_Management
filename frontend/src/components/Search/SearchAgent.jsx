@@ -1,6 +1,30 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { fetchAgents } from "../../services/api";
 
 function SearchAgent() {
+    
+    const [agents, setAgents] = useState([]);
+
+  // Fetch orders when component loads
+  useEffect(() => {
+    fetchAgents()
+      .then(setAgents)
+      .catch(() => alert("Failed to load Agents"));
+  }, []);
+
+  useEffect(() => {
+    const getAllAgents = async () => {
+      try {
+        const data = await fetchAgents();
+        console.log("Fetched Orders in React:", data); // Debugging log
+        setAgents(data); // Ensure all orders are stored
+      } catch (error) {
+        alert("Failed to load orders");
+      }
+    };
+
+    getAllAgents();
+  }, []);
   return (
     <div className=' xl:w-[1300px] lg:w-[1000px] md:w-full mx-auto lg:mb-42'>
         <div className=' flex lg:flex-row  md:w-full sm:w-full lg:w-3/4 mx-auto lg:mt-20 md:mt-10 mt-5 px-10' >

@@ -118,3 +118,16 @@ export const registerService = async (serviceData) => {
     return error.response?.data || { error: "Something went wrong" };
   }
 };
+
+export const fetchAgents = async () => {
+  try {
+    const response = await axios.get(`${API_URL}search-agents/`, {
+      headers: { Authorization: `Bearer ${getToken()}` },
+    });
+    console.log("Fetched Agents:", response.data);
+    return response.data;
+  } catch (error) {
+    console.log("Error fetching orders", error.response?.data || error);
+    throw error;
+  }
+};

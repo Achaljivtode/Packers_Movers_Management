@@ -1,24 +1,3 @@
-// import React from "react";
-
-// function Quatation() {
-//   return (
-//     <div>
-//       <h1 className="text-orange-400 text-2xl font-semibold text-center my-10">
-//         ALL QUATATION REPORT
-//       </h1>
-
-//       <table className=" mx-auto lg:w-[1000px] md:w-full sm:w-full">
-//         <thead>
-//           <tr className="">
-//             <th className="border p-2 font-normal bg-orange-400 text-white">
-//               ID
-//             </th>
-//             <th className="border p-2 font-normal bg-orange-400 text-white">
-//               Customer Name
-//             </th>
-//             <th className="border p-2 font-normal bg-orange-400 text-white">
-
-
 import { useState, useEffect } from "react";
 import { fetchOrders, updateOrder } from "../../services/api";
 
