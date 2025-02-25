@@ -6,6 +6,7 @@ function Header() {
     const [isDropDownVisible, setIsDropDownVisible] = useState(false);
     const [isSideBarVisible, setIsSideBarVisible] = useState(false);
     const [userRole, setUserRole] = useState('');
+    console.log(userRole)
 
     const toogleDropDown = () => {
         setIsDropDownVisible(!isDropDownVisible);
@@ -62,7 +63,7 @@ function Header() {
                             <>
                                 <a href="/admin-dashboard" className="text-sm/6 font-semibold text-white">Dashboard</a>
                                 <a href="/service-registration" className="text-sm/6 font-semibold text-white">Add Service</a>
-                                <a href="/" className="text-sm/6 font-semibold text-white" onClick={()=> localStorage.setItem('role', "")}>Logout</a>
+                                <a href="/" className="text-sm/6 font-semibold text-white" onClick={() => localStorage.setItem('role', "")}>Logout</a>
                             </>
                         )}
 
@@ -70,7 +71,7 @@ function Header() {
                             <>
                                 <a href="/customer-dashboard" className="text-sm/6 font-semibold text-white">Dashboard</a>
                                 <a href="/register" className="text-sm/6 font-semibold text-white">My Account</a>
-                                <a href="/" className="text-sm/6 font-semibold text-white" onClick={()=>localStorage.setItem('role','')}>Logout</a>
+                                <a href="/" className="text-sm/6 font-semibold text-white" onClick={() => localStorage.setItem('role', '')}>Logout</a>
                             </>
                         )}
 
@@ -78,13 +79,13 @@ function Header() {
                             <>
                                 <a href="/agent-dashboard" className="text-sm/6 font-semibold text-white">Dashboard</a>
                                 <a href="/register" className="text-sm/6 font-semibold text-white">My Account</a>
-                                <a href="/" className="text-sm/6 font-semibold text-white" onClick={()=>localStorage.setItem('role','')}>Logout</a>
+                                <a href="/" className="text-sm/6 font-semibold text-white" onClick={() => localStorage.setItem('role', '')}>Logout</a>
                             </>
                         )}
                         {userRole === '' && (
                             <>
 
-                                <a href="/search" className="text-sm/6 font-semibold text-white">Search</a>
+                                {/* <a href="/search" className="text-sm/6 font-semibold text-white">Search</a> */}
                                 <div className="relative ">
                                     <button type="button"
                                         className="flex items-center gap-x-1 text-sm/6 font-semibold text-white" aria-expanded="false"
@@ -114,25 +115,6 @@ function Header() {
                                 <a href="/feedback" className="text-sm/6 font-semibold text-white">FeedBack</a>
                             </>
                         )}
-
-{/* <div className="relative ">
-
-<div className="relative ">
-    {
-        isDropDownVisible && (
-            <div className="absolute top-full -left-8 z-10 mt-3 w-[200px] max-w-md overflow-hidden rounded-3xl bg-white ring-1 shadow-lg ring-gray-900/5">
-                <div className="p-4  ">
-                    <h1 onClick={() => navigate('/user-login')} className='hover:bg-gray-200 hover:cursor-pointer rounded-md px-3 py-3'>User</h1>
-                    <h1 onClick={() => navigate('/admin-login')} className='hover:bg-gray-200 hover:cursor-pointer rounded-md px-3 py-3' >Admin</h1>
-                    <h1 onClick={() => navigate('/agent-login')} className='hover:bg-gray-200 hover:cursor-pointer rounded-md px-3 py-3' >Agent</h1>
-                </div>
-            </div>
-        )
-    }
-</div>
-</div> */}
-
-
                     </div>
                 </nav>
 
@@ -166,33 +148,63 @@ function Header() {
                                         <div className="space-y-2 py-6">
                                             <a href="/" className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Home</a>
                                             <a href="/about" className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">About</a>
-                                            <a href="/search" className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Search</a>
 
-                                            <div className="-mx-3">
-                                                <button type="button"
-                                                    className="flex w-full items-center justify-between rounded-lg py-2 pr-3.5 pl-3 text-base/7 font-semibold text-gray-900 hover:bg-gray-50" aria-controls="disclosure-1" aria-expanded="false"
-                                                    onClick={toogleDropDown}
-                                                >
-                                                    Login
-                                                    <svg className="size-5 flex-none" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
-                                                        <path fillRule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
-                                                    </svg>
-                                                </button>
+                                            {userRole === 'admin' && (
+                                                <>
+                                                <a href="/admin-dashboard" className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Dashboard</a>
+                                                <a href="/service-registration" className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Add Service</a>
+                                                <a href="/" className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50" onClick={() => localStorage.setItem('role', '')}>Logout</a>
+                                            </>
+                                            )}
 
-                                                {/* login dropdown (mobile view) */}
-                                                {
-                                                    isDropDownVisible && (
-                                                        <div className="mt-2 space-y-2" id="disclosure-1">
-                                                            <a href="/user-login" className="block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-semibold text-gray-900 hover:bg-gray-50">User</a>
-                                                            <a href="/admin-login" className="block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-semibold text-gray-900 hover:bg-gray-50">Admin</a>
-                                                        </div>
-                                                    )
-                                                }
+                                            {userRole === 'customer' && (
+                                                <>
+                                                    <a href="/customer-dashboard" className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Dashboard</a>
+                                                    <a href="/register" className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">My Account</a>
+                                                    <a href="/" className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50" onClick={() => localStorage.setItem('role', '')}>Logout</a>
+                                                </>
+                                            )}  
 
-                                            </div>
+                                            {userRole === 'agent' && (
+                                                <>
+                                                <a href="/agent-dashboard" className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Dashboard</a>
+                                                <a href="/register" className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">My Account</a>
+                                                <a href="/" className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50" onClick={() => localStorage.setItem('role', '')}>Logout</a>
+                                            </>
+                                            )}
+                                            {userRole === '' && (
+                                                <>
+                                                    <div className="-mx-3">
+                                                        <button type="button"
+                                                            className="flex w-full items-center justify-between rounded-lg py-2 pr-3.5 pl-3 text-base/7 font-semibold text-gray-900 hover:bg-gray-50" aria-controls="disclosure-1" aria-expanded="false"
+                                                            onClick={toogleDropDown}
+                                                        >
+                                                            Login
+                                                            <svg className="size-5 flex-none" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                                                                <path fillRule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
+                                                            </svg>
+                                                        </button>
 
-                                            <a href="/register" className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Register</a>
-                                            <a href="/feedback" className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">FeedBack</a>
+
+                                                        {/* login dropdown (mobile view)  */}
+                                                        {
+                                                            isDropDownVisible && (
+                                                                <div className="mt-2 space-y-2" id="disclosure-1">
+                                                                    <a href="/user-login" className="block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-semibold text-gray-900 hover:bg-gray-50">User</a>
+                                                                    <a href="/agent-login" className="block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-semibold text-gray-900 hover:bg-gray-50">Agent</a>
+                                                                    <a href="/admin-login" className="block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-semibold text-gray-900 hover:bg-gray-50">Admin</a>
+                                                                </div>
+                                                            )
+                                                        }
+                                                    </div>
+                                                    <a href="/register" className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Register</a>
+                                                    <a href="/feedback" className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">FeedBack</a>
+                                                </>
+                                            )}
+
+
+
+
 
                                         </div>
                                     </div>

@@ -13,12 +13,13 @@ import UserDashboardPage from "../pages/UserDashboardPage";
 import QuatationEntryPage from "../pages/QuatationEntryPage";
 import ServicePage from "../pages/ServicePage";
 import ServiceDetailsPage from "../pages/ServiceDetailsPage";
+import AgentDetailPage from "../pages/AgentDetailPage";
 
 const route = createBrowserRouter([
     { path: '' , element: <HomePage /> },
     { path: '/about' , element: <AboutPage /> },
-    { path: '/search' , element: <SearchPage /> },
     { path: '/find-agent' , element: <SearchPage /> },
+    { path: '/agent-detail/:id' , element: <AgentDetailPage /> },
     { path: '/user-login' , element: <LoginPage /> },
     { path: '/agent-login' , element: <LoginPage /> },
     { path: '/admin-login' , element: <LoginPage /> },

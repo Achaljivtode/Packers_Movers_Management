@@ -58,7 +58,7 @@ function SearchAgent() {
                         <div key={index} className=' sm:w-3/4 md:w-3/4 mx-auto lg:w-full flex p-5'>
                             <img src="/Resources/images/logo.jpg" alt="" className='w-[80px] h-[80px]' />
                             <div className='ml-5 mx-auto'>
-                                <h1 className='text-xl font-semibold my-1 hover:cursor-pointer'>{agent.full_name}<span>({agent.city})</span></h1>
+                                <a href={`/agent-detail/${agent.id}`} className='text-xl text-blue-700 font-semibold my-1 hover:cursor-pointer'>{agent.full_name}<span>({agent.city})</span></a>
                                 <p className='text-gray-500 text-md'>Contact: {agent.mobile}</p>
                                 <p className='text-gray-500 text-md'>Email: {agent.email}</p>
                             </div>     

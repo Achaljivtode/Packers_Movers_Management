@@ -18,6 +18,7 @@ function Servicess() {
         <table className='border w-full'>
           <thead className='border'>
             <tr>
+              <th className='border p-2 bg-orange-400 text-white text-xl font-bold'>Id</th>
               <th className='border p-2 bg-orange-400 text-white text-xl font-bold'>Image</th>
               <th className='border p-2 bg-orange-400 text-white text-xl font-bold'>Name</th>
               <th className='border p-2 bg-orange-400 text-white text-xl font-bold'>Action</th>
@@ -25,6 +26,9 @@ function Servicess() {
           </thead>
           <tbody>
             <tr>
+              {/* id */}
+              <td className='border p-2 text-center'> Id </td>
+
               {/* image */}
               <td className='border p-2 text-center'> image </td>
 
@@ -33,7 +37,7 @@ function Servicess() {
 
               {/* Action */}
               <td className='border p-2 text-center'> 
-                <a href="/service-detail/:id" className='text-blue-600 font-semibold'> View </a>  
+                <a href={`service-detail/:id`} className='text-blue-600 font-semibold'> View </a>  
               </td>
             </tr>
           </tbody>

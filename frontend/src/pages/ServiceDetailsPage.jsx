@@ -21,12 +21,16 @@ function ServiceDetailsPage() {
                 </thead>
                 <tbody>
                     <tr>
-                        <td className='border p-4 font-bold'>Name</td>
-                        <td className='border p-4 text-lg text-gray-600'>service name here</td>
+                        <td className='border border-gray-300 p-4 bg-gray-200 font-bold'>Id</td>
+                        <td className='border border-gray-300 p-4 bg-gray-200 text-lg text-gray-600'>service Id here</td>
                     </tr>
                     <tr>
-                        <td className='border p-4 font-bold'>Description</td>
-                        <td className='border p-4 text-lg text-gray-600'>Description here</td>
+                        <td className='border border-gray-300 p-4 bg-gray-50 font-bold'>Name</td>
+                        <td className='border border-gray-300 p-4 bg-gray-50 text-lg text-gray-600'>service name here</td>
+                    </tr>
+                    <tr>
+                        <td className='border border-gray-300 p-4 bg-gray-200 font-bold'>Description</td>
+                        <td className='border border-gray-300 p-4 bg-gray-200 text-lg text-gray-600'>Description here</td>
                     </tr>
                 </tbody>
             </table>
