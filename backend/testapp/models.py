@@ -93,4 +93,23 @@ class Order(models.Model):
 
     def __str__(self):
         return f"Order {self.id} - {self.status}"
-    
+
+
+####################### FeedBack Table ########################################
+
+class Feedback(models.Model):
+    RATING_CHOICES = [
+        ('1-star', '1-star'),
+        ('2-star', '2-star'),
+        ('3-star', '3-star'),
+        ('4-star', '4-star'),
+        ('5-star', '5-star'),
+    ]
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)  # Link to CustomUser
+    select_rating = models.CharField(max_length=80, choices=RATING_CHOICES)
+    feedback = models.TextField(default="No feedback provided")
+    created_at = models.DateTimeField(auto_now_add=True)  # Automatically store submission time
+
+    def __str__(self):
+        return f"Feedback from {self.user.full_name} ({self.user.email})"

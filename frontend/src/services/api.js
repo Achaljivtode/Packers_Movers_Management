@@ -119,6 +119,16 @@ export const registerService = async (serviceData) => {
   }
 };
 
+export const fetchServiceById = async (id) => {
+  try {
+    const response = await axios.get(`http://127.0.0.1:8000/services/${id}/`);
+    return response.data; // Return the single service
+  } catch (error) {
+    console.error("Error fetching service by ID:", error);
+    return null;
+  }
+};
+
 export const fetchAgents = async () => {
   try {
     const response = await axios.get(`${API_URL}find-agent/`, {
@@ -134,12 +144,37 @@ export const fetchAgents = async () => {
 
 export const fetchAgentDetails = async (agentId) => {
   try {
-    const response = await axios.get(`${API_URL}agent/${agentId}/`, {
+    const response = await axios.get(`${API_URL}agent-detail/${agentId}/`, {
       headers: { Authorization: `Bearer ${getToken()}` },
     });
     return response.data;
   } catch (error) {
     console.log("Error fetching agent details", error.response?.data || error);
     throw error;
+  }
+};
+
+export const submitFeedback = async (rating, feedback) => {
+  try {
+    const response = await axios.post(
+      `${API_URL}feedback/`,
+      { select_rating: rating, feedback }, // Send only rating & feedback
+      {
+        headers: { Authorization: `Bearer ${getToken()}` }, // Fetch token automatically
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error submitting feedback:", error.response?.data || error);
+    throw error;
+  }
+};
+export const fetchFeedback = async () => {
+  try {
+    const response = await axios.get(`${API_URL}feedback/`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching feedback:", error.response?.data || error);
+    return [];
   }
 };

@@ -5,14 +5,14 @@ from rest_framework.response  import Response
 from rest_framework.views import APIView
 from rest_framework import status,generics
 from django.contrib.auth import authenticate
-from .serializers import UserSerializer,RegisterSerializer,OrderSerializer,ServiceSerializer
+from .serializers import UserSerializer,RegisterSerializer,OrderSerializer,ServiceSerializer,FeedbackSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
 
 from .permissions import IsAdminUser, IsAgentUser, IsCustomerUser
 from rest_framework.generics import GenericAPIView,ListAPIView,RetrieveAPIView
 
-from testapp.models import Order,Service,CustomUser
+from testapp.models import Order,Service,CustomUser,Feedback
 # Create your views here.
 User=get_user_model()
 
@@ -153,6 +153,11 @@ class ServiceListView(generics.ListAPIView):
     queryset = Service.objects.all()
     serializer_class = ServiceSerializer
 
+class ServiceDetailView(RetrieveAPIView):
+    queryset = Service.objects.all()
+    serializer_class = ServiceSerializer
+    lookup_field = "id"
+
 
 class AgentListView(ListAPIView):
     permission_classes = [IsAuthenticated]
@@ -166,4 +171,12 @@ class AgentDetailView(RetrieveAPIView):
     permission_classes=[IsAuthenticated]
     serializer_class=UserSerializer
     queryset=CustomUser.objects.filter(register_as="agent")
-        
+
+
+class FeedbackListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Feedback.objects.all()
+    serializer_class = FeedbackSerializer
+    permission_classes = [IsAuthenticated]  # Only logged-in users can submit feedback
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)  # Assign the logged-in user

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
-from testapp.models import Order,Service
+from testapp.models import Order,Service,Feedback
 
 User=get_user_model()
 
@@ -93,4 +93,18 @@ class ServiceSerializer(serializers.ModelSerializer):
     class Meta:
         model=Service
         fields = "__all__"
+
+class FeedbackSerializer(serializers.ModelSerializer):
+    full_name = serializers.CharField(source="user.full_name", read_only=True)  # Auto-fetch full name
+    email = serializers.EmailField(source="user.email", read_only=True)  # Auto-fetch email
+
+    class Meta:
+        model = Feedback
+        fields = ['id', 'user', 'full_name', 'email', 'select_rating', 'feedback', 'created_at']
+        read_only_fields = ['id', 'user', 'full_name', 'email', 'created_at']  # These fields cannot be modified
+
+    def create(self, validated_data):
+        request = self.context.get('request')  # Get the request context
+        validated_data['user'] = request.user  # Assign the logged-in user
+        return super().create(validated_data)
 
