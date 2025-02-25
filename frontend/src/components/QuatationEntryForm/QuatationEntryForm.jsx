@@ -12,6 +12,8 @@ const QuatationEntryForm = () => {
     Reference: "",
     details_of_service: "",
   });
+  console.log(formData);
+  
 
   // Fetch services when the component loads
   useEffect(() => {
