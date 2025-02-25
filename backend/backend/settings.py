@@ -98,7 +98,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'pack_move_db',
         'USER': 'root',
-        'PASSWORD': 'mysql123',
+        'PASSWORD': 'mohitjodhe2003',
         'HOST': 'localhost',
         'PORT': '3306',
     }

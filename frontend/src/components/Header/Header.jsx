@@ -16,9 +16,6 @@ function Header() {
         setIsSideBarVisible(!isSideBarVisible)
     }
 
-    // const removeRole = () => {
-    //     localStorage.setItem('role', '');
-    // }
 
     useEffect(() => {
         const role = localStorage.getItem('role');

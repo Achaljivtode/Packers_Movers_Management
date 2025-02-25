@@ -14,7 +14,7 @@ const dashboard = {
     'admin': {
         'Quatation Management': { 'link': '/quatation-report' },
         'Service Management': { 'link': '/service-management' },
-        'Feedback Management': { 'link': '/feedback-management' },
+        'Feedback Management': { 'link': '/feedback-details' },
         'Customers Management': { 'link': '/customer-management' },
         'Add Customers': { 'link': '/register-new-customer' },
         'Reports': { 'link': '/reports' },

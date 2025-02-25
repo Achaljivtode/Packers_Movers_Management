@@ -14,6 +14,8 @@ import QuatationEntryPage from "../pages/QuatationEntryPage";
 import ServicePage from "../pages/ServicePage";
 import ServiceDetailsPage from "../pages/ServiceDetailsPage";
 import AgentDetailPage from "../pages/AgentDetailPage";
+import FeedBackDetailsPage from "../pages/FeedBackDetailsPage";
+import CustomerFeedBackPage from "../pages/CustomerFeedBackPage";
 
 const route = createBrowserRouter([
     { path: '' , element: <HomePage /> },
@@ -26,6 +28,8 @@ const route = createBrowserRouter([
     { path: '/register' , element: <RegisterationPage /> },
     { path: '/update' , element: <RegisterationPage /> },
     { path: '/feedback' , element: <FeedBackPage /> },
+    { path: '/feedback-details' , element: <FeedBackDetailsPage /> },
+    { path: '/feedback-details/:id' , element: <CustomerFeedBackPage /> },
     { path: '/service-registration' , element: <ServiceRegisterPage /> },
     { path: '/service-management' , element: <ServicePage /> },
     { path: '/service-detail/:id' , element: <ServiceDetailsPage /> },
