@@ -131,3 +131,15 @@ export const fetchAgents = async () => {
     throw error;
   }
 };
+
+export const fetchAgentDetails = async (agentId) => {
+  try {
+    const response = await axios.get(`${API_URL}agent/${agentId}/`, {
+      headers: { Authorization: `Bearer ${getToken()}` },
+    });
+    return response.data;
+  } catch (error) {
+    console.log("Error fetching agent details", error.response?.data || error);
+    throw error;
+  }
+};

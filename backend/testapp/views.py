@@ -10,9 +10,9 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
 
 from .permissions import IsAdminUser, IsAgentUser, IsCustomerUser
-from rest_framework.generics import GenericAPIView,ListAPIView
+from rest_framework.generics import GenericAPIView,ListAPIView,RetrieveAPIView
 
-from testapp.models import Order,Service
+from testapp.models import Order,Service,CustomUser
 # Create your views here.
 User=get_user_model()
 
@@ -160,4 +160,10 @@ class AgentListView(ListAPIView):
 
     def get_queryset(self):
         return User.objects.filter(register_as="agent")
+    
+
+class AgentDetailView(RetrieveAPIView):
+    permission_classes=[IsAuthenticated]
+    serializer_class=UserSerializer
+    queryset=CustomUser.objects.filter(register_as="agent")
         
