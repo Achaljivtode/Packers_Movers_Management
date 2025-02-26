@@ -16,6 +16,9 @@ import ServiceDetailsPage from "../pages/ServiceDetailsPage";
 import AgentDetailPage from "../pages/AgentDetailPage";
 import FeedBackDetailsPage from "../pages/FeedBackDetailsPage";
 import CustomerFeedBackPage from "../pages/CustomerFeedBackPage";
+import AllCustomer from "../pages/AllCustomer";
+import CustomerDetailPage from "../pages/CustomerDetailPage";
+import AllAgents from "../pages/AllAgents";
 
 const route = createBrowserRouter([
     { path: '' , element: <HomePage /> },
@@ -38,6 +41,9 @@ const route = createBrowserRouter([
     { path: '/admin-dashboard' , element: <AdminDashboardPage /> },
     { path: '/agent-dashboard' , element: <AgentDashboardPage /> },
     { path: '/customer-dashboard' , element: <UserDashboardPage /> },
+    { path: '/all-customers' , element: <AllCustomer /> },
+    { path: '/all-agents' , element: <AllAgents /> },
+    { path: '/customer-detail/:id' , element: <CustomerDetailPage /> },
 
 ])
 

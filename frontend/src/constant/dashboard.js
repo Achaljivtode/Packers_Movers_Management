@@ -7,7 +7,7 @@ const dashboard = {
         'Logout' : { link: '/' }
     },
     'agent': {
-        'View Quatation': { link: '/view-quatation'},
+        'View Quatation': { link: '/quatation-report'},
         'My Account': { link: '/update'},
         'Logout': { link: '/'}
     },
@@ -15,9 +15,8 @@ const dashboard = {
         'Quatation Management': { 'link': '/quatation-report' },
         'Service Management': { 'link': '/service-management' },
         'Feedback Management': { 'link': '/feedback-details' },
-        'Customers Management': { 'link': '/customer-management' },
-        'Add Customers': { 'link': '/register-new-customer' },
-        'Reports': { 'link': '/reports' },
+        'Customers Management': { 'link': '/all-customers' },
+        'Agent Management': { 'link': '/all-agents' },
     }
 }
 

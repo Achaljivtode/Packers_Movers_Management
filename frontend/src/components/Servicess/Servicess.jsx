@@ -54,27 +54,7 @@ function Servicess() {
             </tr>
           </thead>
           <tbody>
-            {/* <tr>
-             
-              <td className="border p-2 text-center"> Id </td>
 
-           
-              <td className="border p-2 text-center"> image </td>
-
-             
-              <td className="border p-2 text-center"> Name </td>
-
-              
-              <td className="border p-2 text-center">
-                <a
-                  href={`service-detail/:id`}
-                  className="text-blue-600 font-semibold"
-                >
-                  {" "}
-                  View{" "}
-                </a>
-              </td>
-            </tr> */}
             {services
               .filter((service) =>
                 service.service_name
@@ -88,7 +68,7 @@ function Servicess() {
                     <img
                       src={service.service_image}
                       alt={service.service_name}
-                      className="w-16 h-16 object-cover rounded-md"
+                      className="w-16 h-16 mx-auto object-cover rounded-md"
                     />
                   </td>
                   <td className="border p-2 text-center">
