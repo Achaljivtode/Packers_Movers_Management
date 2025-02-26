@@ -30,7 +30,7 @@ from testapp.views import (
     OrderListView,
     ServiceListView,
     ServiceCreateView,
-    AgentListView,AgentDetailView,ServiceDetailView,FeedbackListCreateAPIView,CustomerListView,CustomerDetailView
+    AgentListView,AgentDetailView,ServiceDetailView,FeedbackListCreateAPIView,CustomerListView,CustomerDetailView,UserProfileView,DeleteCustomerView,FeedbackListAPIView
     )
 
 urlpatterns = [
@@ -49,8 +49,12 @@ urlpatterns = [
     path("find-agent/", AgentListView.as_view(), name="search-agents"),
     path("agent-detail/<int:pk>/", AgentDetailView.as_view(), name="agent-detail"),
     path('feedback/', FeedbackListCreateAPIView.as_view(), name='feedback-list-create'),
+    path('get_feedback/', FeedbackListAPIView.as_view(), name='feedback_get'),
     path("customers/", CustomerListView.as_view(), name="all-customers"),
-    path("customers/<int:id>/", CustomerDetailView.as_view(), name="customer-detail"),      
+    path("customers/<int:id>/", CustomerDetailView.as_view(), name="customer-detail"), 
+    path('user/profile/', UserProfileView.as_view(), name='user-profile'), 
+    path("customers/<int:customer_id>/delete/", DeleteCustomerView.as_view(), name="delete-customer"),
+    
   
 
     

@@ -6,6 +6,7 @@ User=get_user_model()
 
 class UserSerializer(serializers.ModelSerializer):
     register_as_display = serializers.CharField(source='get_register_as_display', read_only=True)
+    
     class Meta:
         model=User
         fields=['id','username','email','register_as','register_as_display', 'full_name','password','DOB','mobile','Nationality','Address','country','state','city']

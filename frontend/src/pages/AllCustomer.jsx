@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import { useNavigate } from "react-router-dom";
-import { fetchAllCustomers } from "../services/api";
+import { fetchAllCustomers, deleteCustomer } from "../services/api";
 
 function AllCustomer() {
   const [customers, setCustomers] = useState([]);
@@ -15,6 +15,22 @@ function AllCustomer() {
     };
     getCustomers();
   }, []);
+
+  // Delete a customer
+  const handleDelete = async (id) => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this customer?"
+    );
+    if (confirmed) {
+      const success = await deleteCustomer(id);
+      if (success) {
+        setCustomers(customers.filter((customer) => customer.id !== id)); // Remove from UI
+        alert("Customer deleted successfully!");
+      } else {
+        alert("Failed to delete customer.");
+      }
+    }
+  };
 
   return (
     <div>
@@ -79,7 +95,10 @@ function AllCustomer() {
                     >
                       View
                     </button>
-                    <button className="border py-1 px-3 ml-2 hover:cursor-pointer text-white rounded-md bg-red-400">
+                    <button
+                      onClick={() => handleDelete(customer.id)}
+                      className="border py-1 px-3 ml-2 hover:cursor-pointer text-white rounded-md bg-red-400"
+                    >
                       Delete
                     </button>
                   </div>

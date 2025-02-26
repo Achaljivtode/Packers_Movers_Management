@@ -40,16 +40,6 @@ class LoginView(APIView):
         if user is None:
             return Response({"error":"Invalid email or password"})
         
-        # try:
-        #     user=authenticate(request,username=email,password=password)
-           
-        #     if user is None:
-        #         return Response({"error":"Invalid Credentials"},status=status.HTTP_400_BAD_REQUEST)  
-        # except User.DoesNotExist:
-        #     return Response({"error": "Invalid email or password"}, status=status.HTTP_400_BAD_REQUEST)
-        
-
-       
         refresh = RefreshToken.for_user(user)
         return Response({
             "message":"Login Succesfull !",
@@ -172,26 +162,19 @@ class AgentDetailView(RetrieveAPIView):
     serializer_class=UserSerializer
     queryset=CustomUser.objects.filter(register_as="agent")
 
+# post
+class FeedbackListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Feedback.objects.all()
+    serializer_class = FeedbackSerializer
+    permission_classes = [IsAuthenticated]  # Only logged-in users can submit feedback
 
-# class FeedbackListCreateAPIView(generics.ListCreateAPIView):
-#     queryset = Feedback.objects.all()
-#     serializer_class = FeedbackSerializer
-#     permission_classes = [IsAuthenticated]  # Only logged-in users can submit feedback
-
-#     def perform_create(self, serializer):
-#         serializer.save(user=self.request.user)  # Assign the logged-in user
-
-# class FeedbackDetailView(RetrieveAPIView):
-#     serializer_class = FeedbackSerializer
-#     permission_classes = [IsAuthenticated]
-
-#     def get(self, request, feedback_id):
-#         feedback = get_object_or_404(Feedback, id=feedback_id)  # Get feedback by ID
-#         serializer = FeedbackSerializer(feedback)  # Serialize the feedback object
-#         return Response(serializer.data)  # Return feedback details
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)  # Assign the logged-in user
 
 
-class FeedbackListCreateAPIView(APIView):
+
+
+class FeedbackListAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
@@ -203,6 +186,8 @@ class FeedbackListCreateAPIView(APIView):
 
         serializer = FeedbackSerializer(feedbacks, many=True)
         return Response(serializer.data, status=200)
+    
+    
     
 
 class CustomerListView(ListAPIView):
@@ -217,3 +202,29 @@ class CustomerDetailView(RetrieveAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.filter(register_as="customer")
     lookup_field = "id"
+
+
+
+class UserProfileView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        serializer = UserSerializer(request.user)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def put(self, request):
+        serializer = UserSerializer(request.user, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# Delete Customer (Only Admins can delete customers)
+class DeleteCustomerView(APIView):
+    permission_classes = [IsAuthenticated, IsAdminUser]
+
+    def delete(self, request, customer_id):
+        customer = get_object_or_404(CustomUser, id=customer_id, register_as="customer")
+        customer.delete()
+        return Response({"message": "Customer deleted successfully"}, status=status.HTTP_204_NO_CONTENT)

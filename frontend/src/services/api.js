@@ -171,7 +171,7 @@ export const submitFeedback = async (rating, feedback) => {
 };
 export const fetchAllFeedback = async () => {
   try {
-    const response = await axios.get(`${API_URL}feedback/`, {
+    const response = await axios.get(`${API_URL}get_feedback/`, {
       headers: {
         Authorization: `Bearer ${getToken()}`,
       },
@@ -185,9 +185,12 @@ export const fetchAllFeedback = async () => {
 
 export const fetchFeedbackByUser = async (userId) => {
   try {
-    const response = await axios.get(`${API_URL}feedback/?user_id=${userId}`, {
-      headers: { Authorization: `Bearer ${getToken()}` },
-    });
+    const response = await axios.get(
+      `${API_URL}get_feedback/?user_id=${userId}`,
+      {
+        headers: { Authorization: `Bearer ${getToken()}` },
+      }
+    );
     return response.data;
   } catch (error) {
     console.error(
@@ -210,6 +213,19 @@ export const fetchAllCustomers = async () => {
   }
 };
 
+// Delete a customer (Only Admin)
+export const deleteCustomer = async (customerId) => {
+  try {
+    await axios.delete(`${API_URL}/customers/${customerId}/delete/`, {
+      headers: { Authorization: `Bearer ${getToken()}` },
+    });
+    return true;
+  } catch (error) {
+    console.error("Error deleting customer:", error);
+    return false;
+  }
+};
+
 export const fetchCustomerById = async (customerId) => {
   try {
     const response = await axios.get(`${API_URL}customers/${customerId}/`, {
@@ -219,5 +235,29 @@ export const fetchCustomerById = async (customerId) => {
   } catch (error) {
     console.error("Error fetching customer details:", error);
     return null;
+  }
+};
+
+export const fetchUserProfile = async () => {
+  try {
+    const response = await axios.get(`${API_URL}user/profile/`, {
+      headers: { Authorization: `Bearer ${getToken()}` },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching user profile:", error);
+    return null;
+  }
+};
+
+export const updateUserProfile = async (userData) => {
+  try {
+    const response = await axios.put(`${API_URL}user/profile/`, userData, {
+      headers: { Authorization: `Bearer ${getToken()}` },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error updating user profile:", error);
+    return error.response?.data || { error: "Something went wrong" };
   }
 };

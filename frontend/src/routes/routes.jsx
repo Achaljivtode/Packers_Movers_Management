@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import RegisterationPage from "../pages/RegisterationPage";
+import UpdateUserPage from "../pages/updateUserDetailsPage";
 import LoginPage from "../pages/LoginPage";
 import HomePage from "../pages/HomePage";
 import AboutPage from "../pages/AboutPage";
@@ -21,30 +22,29 @@ import CustomerDetailPage from "../pages/CustomerDetailPage";
 import AllAgents from "../pages/AllAgents";
 
 const route = createBrowserRouter([
-    { path: '' , element: <HomePage /> },
-    { path: '/about' , element: <AboutPage /> },
-    { path: '/find-agent' , element: <SearchPage /> },
-    { path: '/agent-detail/:id' , element: <AgentDetailPage /> },
-    { path: '/user-login' , element: <LoginPage /> },
-    { path: '/agent-login' , element: <LoginPage /> },
-    { path: '/admin-login' , element: <LoginPage /> },
-    { path: '/register' , element: <RegisterationPage /> },
-    { path: '/update' , element: <RegisterationPage /> },
-    { path: '/feedback' , element: <FeedBackPage /> },
-    { path: '/feedback-details' , element: <FeedBackDetailsPage /> },
-    { path: '/feedback-details/:id' , element: <CustomerFeedBackPage /> },
-    { path: '/service-registration' , element: <ServiceRegisterPage /> },
-    { path: '/service-management' , element: <ServicePage /> },
-    { path: '/service-detail/:id' , element: <ServiceDetailsPage /> },
-    { path: '/quatation-report' , element: <QuatationReportPage /> },
-    { path: '/quatation-register' , element: <QuatationEntryPage /> },
-    { path: '/admin-dashboard' , element: <AdminDashboardPage /> },
-    { path: '/agent-dashboard' , element: <AgentDashboardPage /> },
-    { path: '/customer-dashboard' , element: <UserDashboardPage /> },
-    { path: '/all-customers' , element: <AllCustomer /> },
-    { path: '/all-agents' , element: <AllAgents /> },
-    { path: '/customer-detail/:id' , element: <CustomerDetailPage /> },
-
-])
+  { path: "", element: <HomePage /> },
+  { path: "/about", element: <AboutPage /> },
+  { path: "/find-agent", element: <SearchPage /> },
+  { path: "/agent-detail/:id", element: <AgentDetailPage /> },
+  { path: "/user-login", element: <LoginPage /> },
+  { path: "/agent-login", element: <LoginPage /> },
+  { path: "/admin-login", element: <LoginPage /> },
+  { path: "/register", element: <RegisterationPage /> },
+  { path: "/update", element: <UpdateUserPage /> },
+  { path: "/feedback", element: <FeedBackPage /> },
+  { path: "/feedback-details", element: <FeedBackDetailsPage /> },
+  { path: "/feedback-details/:id", element: <CustomerFeedBackPage /> },
+  { path: "/service-registration", element: <ServiceRegisterPage /> },
+  { path: "/service-management", element: <ServicePage /> },
+  { path: "/service-detail/:id", element: <ServiceDetailsPage /> },
+  { path: "/quatation-report", element: <QuatationReportPage /> },
+  { path: "/quatation-register", element: <QuatationEntryPage /> },
+  { path: "/admin-dashboard", element: <AdminDashboardPage /> },
+  { path: "/agent-dashboard", element: <AgentDashboardPage /> },
+  { path: "/customer-dashboard", element: <UserDashboardPage /> },
+  { path: "/all-customers", element: <AllCustomer /> },
+  { path: "/all-agents", element: <AllAgents /> },
+  { path: "/customer-detail/:id", element: <CustomerDetailPage /> },
+]);
 
 export default route;

@@ -2,14 +2,13 @@ import React, { useEffect, useState } from "react";
 import Header from "../components/Header/Header";
 
 import { FaShareSquare } from "react-icons/fa";
-import { MdDeleteForever } from "react-icons/md";
+
 import Footer from "../components/Footer/Footer";
 import { useNavigate } from "react-router-dom";
 import { fetchAllFeedback } from "../services/api";
 
 function FeedBackDetailsPage() {
   const navigate = useNavigate();
-  //   const [customer, setCustomer] = useState();
   const [feedbacks, setFeedbacks] = useState([]);
 
   useEffect(() => {
@@ -73,7 +72,6 @@ function FeedBackDetailsPage() {
                       }
                       className="text-2xl hover:cursor-pointer text-blue-500"
                     />
-                    <MdDeleteForever className="text-3xl hover:cursor-pointer text-red-500" />
                   </div>
                 </td>
               </tr>

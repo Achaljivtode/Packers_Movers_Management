@@ -28,6 +28,7 @@ class CustomUser(AbstractUser):
     Nationality=models.CharField(max_length=100,default="-")
 
     Address=models.CharField(max_length=200,default="-")
+    
 
     country=models.CharField(max_length=100,default="-")
     state=models.CharField(max_length=100,default="-")
