@@ -2,92 +2,114 @@ import React, { useEffect, useState } from "react";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import { useParams } from "react-router-dom";
-import { fetchAllFeedback } from "../services/api";
+import { fetchFeedbackByUser } from "../services/api";
 
 function CustomerFeedBackPage() {
-  const { id } = useParams();
-  const [customerFeedback, setCustomerFeedback] = useState(null);
+  const { id } = useParams(); // Get the user ID from URL
+  const [customerFeedbacks, setCustomerFeedbacks] = useState([]);
 
   useEffect(() => {
     const getCustomerFeedback = async () => {
       try {
-        const allFeedbacks = await fetchAllFeedback();
-
-        console.log("All Feedbacks from API:", allFeedbacks);
-        const filteredFeedbacks = allFeedbacks.filter(
-          (feedback) => Number(feedback.user) === Number(id)
-        );
-        if (filteredFeedbacks.length > 0) {
-          setCustomerFeedback(filteredFeedbacks[0]); // Store first feedback
-        } else {
-          setCustomerFeedback(null); // No feedback found
-        }
+        const feedbacks = await fetchFeedbackByUser(id); // Fetch feedback for a specific user
+        setCustomerFeedbacks(feedbacks);
       } catch (error) {
         console.error("Failed to fetch customer feedback", error);
       }
     };
     getCustomerFeedback();
   }, [id]);
+
+  // Extract user details from the first feedback entry (if available)
+  const userName =
+    customerFeedbacks.length > 0 ? customerFeedbacks[0].full_name : "N/A";
+  const userEmail =
+    customerFeedbacks.length > 0 ? customerFeedbacks[0].email : "N/A";
+  const userContact =
+    customerFeedbacks.length > 0 ? customerFeedbacks[0].mobile : "N/A";
+  const userAddress =
+    customerFeedbacks.length > 0 ? customerFeedbacks[0].Address : "N/A";
+
   return (
     <div>
       <Header />
       <h1 className="bg-gray-300 py-4 text-3xl text-orange-400 font-bold text-center">
-        Feedback Detail
+        User Feedbacks
       </h1>
 
-      <div className="w-3/4 mx-auto my-20">
-        <h2 className="text-xl mb-1 text-semibold">
-          Feedback for Customer ID: {id}
-        </h2>
-        <hr />
-      </div>
-
       <div className="w-3/4 mx-auto mb-20">
-        {customerFeedback ? (
-          <table className="w-full border">
+        <h2 className="text-xl font-semibold">Customer Details</h2>
+        <hr />
+        <table className="border mt-5">
+          <tbody>
             <thead>
               <tr>
                 <th className="border bg-orange-400 text-white p-3 text-xl">
-                  COLUMN
+                  userName
                 </th>
                 <th className="border bg-orange-400 text-white p-3 text-xl">
-                  DATA
+                  Email
+                </th>
+                <th className="border bg-orange-400 text-white p-3 text-xl">
+                  Contact
+                </th>
+                <th className="border bg-orange-400 text-white p-3 text-xl">
+                  Address
                 </th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td className="border border-gray-300 text-center p-4 font-semibold">
-                  Name
+                  {userName}
                 </td>
-                <td className="border border-gray-300 text-center p-4 ">
-                  {customerFeedback.full_name}
-                </td>
-              </tr>
-              <tr>
-                <td className="border border-gray-300 bg-gray-200 text-center p-4 font-semibold">
-                  Email
-                </td>
-                <td className="border border-gray-300 bg-gray-200 text-center p-4 ">
-                  {customerFeedback.email}
-                </td>
-              </tr>
-              <tr>
                 <td className="border border-gray-300 text-center p-4 font-semibold">
-                  Rating
+                  {userEmail}
                 </td>
-                <td className="border border-gray-300 text-center p-4 ">
-                  {customerFeedback.select_rating}
+                <td className="border border-gray-300 text-center p-4 font-semibold">
+                  {userContact}
+                </td>
+                <td className="border border-gray-300 text-center p-4 font-semibold">
+                  {userAddress}
                 </td>
               </tr>
+            </tbody>
+          </tbody>
+        </table>
+      </div>
+
+      <div className="w-3/4 mx-auto mb-20">
+        <h2 className="text-xl font-semibold">Feedback History</h2>
+        <hr />
+        {customerFeedbacks.length > 0 ? (
+          <table className="w-full border mt-5">
+            <thead>
               <tr>
-                <td className="border border-gray-300 bg-gray-200 text-center p-4 font-semibold">
+                <th className="border bg-orange-400 text-white p-3 text-xl">
+                  Date
+                </th>
+                <th className="border bg-orange-400 text-white p-3 text-xl">
+                  Rating
+                </th>
+                <th className="border bg-orange-400 text-white p-3 text-xl">
                   Feedback
-                </td>
-                <td className="border border-gray-300 bg-gray-200 text-center p-4 ">
-                  {customerFeedback.feedback}
-                </td>
+                </th>
               </tr>
+            </thead>
+            <tbody>
+              {customerFeedbacks.map((feedback) => (
+                <tr key={feedback.id}>
+                  <td className="border border-gray-300 text-center p-4">
+                    {feedback.created_at}
+                  </td>
+                  <td className="border border-gray-300 text-center p-4">
+                    {feedback.select_rating}
+                  </td>
+                  <td className="border border-gray-300 text-center p-4">
+                    {feedback.feedback}
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         ) : (
@@ -96,6 +118,7 @@ function CustomerFeedBackPage() {
           </p>
         )}
       </div>
+
       <Footer />
     </div>
   );

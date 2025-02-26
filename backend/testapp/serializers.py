@@ -98,11 +98,13 @@ class FeedbackSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(read_only=True)
     full_name = serializers.CharField(source="user.full_name", read_only=True)  # Auto-fetch full name
     email = serializers.EmailField(source="user.email", read_only=True)  # Auto-fetch email
+    mobile = serializers.EmailField(source="user.mobile", read_only=True)  
+    Address = serializers.EmailField(source="user.Address", read_only=True)  
 
     class Meta:
         model = Feedback
-        fields = ['id', 'user', 'full_name', 'email', 'select_rating', 'feedback', 'created_at']
-        read_only_fields = ['id', 'user', 'full_name', 'email', 'created_at']  # These fields cannot be modified
+        fields = ['id', 'user', 'full_name', 'email','mobile','Address', 'select_rating', 'feedback', 'created_at']
+        read_only_fields = ['id', 'user', 'full_name', 'email','mobile','Address' 'created_at']  # These fields cannot be modified
 
     def create(self, validated_data):
         request = self.context.get('request')  # Get the request context

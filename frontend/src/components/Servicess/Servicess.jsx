@@ -42,9 +42,9 @@ function Servicess() {
               <th className="border p-2 bg-orange-400 text-white text-xl font-bold">
                 Id
               </th>
-              <th className="border p-2 bg-orange-400 text-white text-xl font-bold">
+              {/* <th className="border p-2 bg-orange-400 text-white text-xl font-bold">
                 Image
-              </th>
+              </th> */}
               <th className="border p-2 bg-orange-400 text-white text-xl font-bold">
                 Name
               </th>
@@ -54,7 +54,6 @@ function Servicess() {
             </tr>
           </thead>
           <tbody>
-
             {services
               .filter((service) =>
                 service.service_name
@@ -64,13 +63,13 @@ function Servicess() {
               .map((service) => (
                 <tr key={service.id}>
                   <td className="border p-2 text-center">{service.id}</td>
-                  <td className="border p-2 text-center">
+                  {/* <td className="border p-2 text-center">
                     <img
                       src={service.service_image}
                       alt={service.service_name}
                       className="w-16 h-16 mx-auto object-cover rounded-md"
                     />
-                  </td>
+                  </td> */}
                   <td className="border p-2 text-center">
                     {service.service_name}
                   </td>

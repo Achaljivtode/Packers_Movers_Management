@@ -41,8 +41,9 @@ function FeedBackDetailsPage() {
             <tr>
               <th className="p-3 text-xl border border-orange-500">ID</th>
               <th className="p-3 text-xl border border-orange-500">NAME</th>
-              <th className="p-3 text-xl border border-orange-500">EMAIL</th>
+              {/* <th className="p-3 text-xl border border-orange-500">EMAIL</th> */}
               <th className="p-3 text-xl border border-orange-500">RATING</th>
+              <th className="p-3 text-xl border border-orange-500">FEEDBACK</th>
               <th className="p-3 text-xl border border-orange-500">ACTION</th>
             </tr>
           </thead>
@@ -56,17 +57,19 @@ function FeedBackDetailsPage() {
                 <td className=" border p-2">{feedback.full_name}</td>
 
                 {/* email here */}
-                <td className=" border p-2">{feedback.email}</td>
+                {/* <td className=" border p-2">{feedback.email}</td> */}
 
                 {/* rating here */}
                 <td className=" border p-2">{feedback.select_rating}</td>
+
+                <td className=" border p-2">{feedback.feedback}</td>
 
                 {/* action here */}
                 <td className="p-2">
                   <div className="flex flex-row  justify-around">
                     <FaShareSquare
                       onClick={() =>
-                        navigate(`/feedback-details/${feedback.id}`)
+                        navigate(`/feedback-details/${feedback.user}`)
                       }
                       className="text-2xl hover:cursor-pointer text-blue-500"
                     />

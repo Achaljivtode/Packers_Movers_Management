@@ -173,10 +173,47 @@ class AgentDetailView(RetrieveAPIView):
     queryset=CustomUser.objects.filter(register_as="agent")
 
 
-class FeedbackListCreateAPIView(generics.ListCreateAPIView):
-    queryset = Feedback.objects.all()
-    serializer_class = FeedbackSerializer
-    permission_classes = [IsAuthenticated]  # Only logged-in users can submit feedback
+# class FeedbackListCreateAPIView(generics.ListCreateAPIView):
+#     queryset = Feedback.objects.all()
+#     serializer_class = FeedbackSerializer
+#     permission_classes = [IsAuthenticated]  # Only logged-in users can submit feedback
 
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)  # Assign the logged-in user
+#     def perform_create(self, serializer):
+#         serializer.save(user=self.request.user)  # Assign the logged-in user
+
+# class FeedbackDetailView(RetrieveAPIView):
+#     serializer_class = FeedbackSerializer
+#     permission_classes = [IsAuthenticated]
+
+#     def get(self, request, feedback_id):
+#         feedback = get_object_or_404(Feedback, id=feedback_id)  # Get feedback by ID
+#         serializer = FeedbackSerializer(feedback)  # Serialize the feedback object
+#         return Response(serializer.data)  # Return feedback details
+
+
+class FeedbackListCreateAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user_id = request.query_params.get("user_id")  # Get user_id from query params
+        if user_id:
+            feedbacks = Feedback.objects.filter(user_id=user_id)  # Get all feedbacks from this user
+        else:
+            feedbacks = Feedback.objects.all()  # Return all feedbacks if no user_id is provided
+
+        serializer = FeedbackSerializer(feedbacks, many=True)
+        return Response(serializer.data, status=200)
+    
+
+class CustomerListView(ListAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = UserSerializer
+
+    def get_queryset(self):
+        return User.objects.filter(register_as="customer")
+    
+class CustomerDetailView(RetrieveAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = UserSerializer
+    queryset = User.objects.filter(register_as="customer")
+    lookup_field = "id"

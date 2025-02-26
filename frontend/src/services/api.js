@@ -182,3 +182,42 @@ export const fetchAllFeedback = async () => {
     return [];
   }
 };
+
+export const fetchFeedbackByUser = async (userId) => {
+  try {
+    const response = await axios.get(`${API_URL}feedback/?user_id=${userId}`, {
+      headers: { Authorization: `Bearer ${getToken()}` },
+    });
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Error fetching user feedback:",
+      error.response?.data || error
+    );
+    return [];
+  }
+};
+
+export const fetchAllCustomers = async () => {
+  try {
+    const response = await axios.get(`${API_URL}customers/`, {
+      headers: { Authorization: `Bearer ${getToken()}` },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching customers:", error);
+    return [];
+  }
+};
+
+export const fetchCustomerById = async (customerId) => {
+  try {
+    const response = await axios.get(`${API_URL}customers/${customerId}/`, {
+      headers: { Authorization: `Bearer ${getToken()}` },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching customer details:", error);
+    return null;
+  }
+};

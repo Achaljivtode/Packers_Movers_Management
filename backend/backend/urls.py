@@ -30,7 +30,7 @@ from testapp.views import (
     OrderListView,
     ServiceListView,
     ServiceCreateView,
-    AgentListView,AgentDetailView,ServiceDetailView,FeedbackListCreateAPIView
+    AgentListView,AgentDetailView,ServiceDetailView,FeedbackListCreateAPIView,CustomerListView,CustomerDetailView
     )
 
 urlpatterns = [
@@ -48,7 +48,11 @@ urlpatterns = [
     path("services/<int:id>/", ServiceDetailView.as_view(), name="service-detail"),
     path("find-agent/", AgentListView.as_view(), name="search-agents"),
     path("agent-detail/<int:pk>/", AgentDetailView.as_view(), name="agent-detail"),
-     path('feedback/', FeedbackListCreateAPIView.as_view(), name='feedback-list-create'),
+    path('feedback/', FeedbackListCreateAPIView.as_view(), name='feedback-list-create'),
+    path("customers/", CustomerListView.as_view(), name="all-customers"),
+    path("customers/<int:id>/", CustomerDetailView.as_view(), name="customer-detail"),      
+  
+
     
 ] 
 
