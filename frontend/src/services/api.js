@@ -169,9 +169,13 @@ export const submitFeedback = async (rating, feedback) => {
     throw error;
   }
 };
-export const fetchFeedback = async () => {
+export const fetchAllFeedback = async () => {
   try {
-    const response = await axios.get(`${API_URL}feedback/`);
+    const response = await axios.get(`${API_URL}feedback/`, {
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
+    });
     return response.data;
   } catch (error) {
     console.error("Error fetching feedback:", error.response?.data || error);

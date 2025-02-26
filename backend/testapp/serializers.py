@@ -95,6 +95,7 @@ class ServiceSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 class FeedbackSerializer(serializers.ModelSerializer):
+    user = serializers.PrimaryKeyRelatedField(read_only=True)
     full_name = serializers.CharField(source="user.full_name", read_only=True)  # Auto-fetch full name
     email = serializers.EmailField(source="user.email", read_only=True)  # Auto-fetch email
 
